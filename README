@@ -4,23 +4,23 @@ Umgang mit Git:
 
 Einrichtung:
 Git Installieren und Anweisungen folgen.
-Mir bescheid sagen wie ihr heißt, damit ich euch als Collaborators hinzufügen kann!
+Mir bescheid sagen wie ihr heiï¿½t, damit ich euch als Collaborators hinzufï¿½gen kann!
 
-1. Einbinden:
+0. Erstellen eines neuen Git Projekts: (hier nicht mehr nÃ¶tig)
 git bash => cd zielordner
 git clone Ziel //(e.g. git@github.com:hagenduk/The-Blob.git)
-Inhalt zufügen in explorer
-git add * // bei versteckten dateien mit . nochmal einzeln hinzufügen
-prüfen mit git status
+Inhalt zufï¿½gen in explorer
+git add * // bei versteckten dateien mit . nochmal einzeln hinzufï¿½gen
+prï¿½fen mit git status
 git commit -m "Nachricht"
 
-2. Einbinden
+1. Einbinden
 gitconsole => cd zielordner
 git clone Ziel (e.g. git@github.com:hagenduk/The-Blob.git)
-in eclipse über import über existing project 
+in eclipse ï¿½ber import ï¿½ber existing project 
 
-3. bei eigener Änderung
-Änderung vornehmen, speichern
+3. bei eigener ï¿½nderung
+ï¿½nderung vornehmen, speichern
 git status
 git add *
 git pull
@@ -29,7 +29,7 @@ git push
 
 4. Infos:
 git status 			// ruft status der Dateien ab
-git add <dateien> 		//* für alle außer versteckten, fügt Dateien hinzu
-git commit -m "Nachricht" 	// übernimmt Änderungen mit Nachricht
-git push 			//übermittelt Änderungen
-git pull 				//ruft Änderungen ab
+git add <dateien> 		//* fï¿½r alle auï¿½er versteckten, fï¿½gt Dateien hinzu
+git commit -m "Nachricht" 	// ï¿½bernimmt ï¿½nderungen mit Nachricht
+git push 			//ï¿½bermittelt ï¿½nderungen
+git pull 				//ruft ï¿½nderungen ab
