@@ -6,9 +6,25 @@ public class Controller {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Hello Sleimi");
 		System.out.println("ahjsldhla");
+		
+		//TODO call eventtrigger
+		//TODO call gui
+		
+		
+	
 	}
+	
+	public static void automation(){
+		//TODO
+	}
+	
+	public static void reset(){
+		//TODO
+		//timer reset
+	}
+	
 
 }
