@@ -8,23 +8,20 @@ public class Controller {
 	public static void main(String[] args) {
 		
 		System.out.println("Hello Sleimi");
-		System.out.println("ahjsldhla");
 		
-		//TODO call eventtrigger
-		//TODO call gui
-		
-		
-	
 	}
 	
-	public static void automation(){
+	public void automation(){
 		//TODO
 	}
 	
-	public static void reset(){
+	public void reset(){
 		//TODO
 		//timer reset
 	}
 	
+	//TODO init GUI
+	//TODO init PM
+	//TODO trigger counterthread for automation
 
 }
