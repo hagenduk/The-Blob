@@ -5,8 +5,6 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
-import sleimiPrototype.Particle;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseAdapter;

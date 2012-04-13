@@ -1,8 +1,5 @@
 package testParticleSystem;
 
-import sleimiPrototype.Particle;
-
-
 public class PMgnt {
 	
 	private int system_size = 0;
