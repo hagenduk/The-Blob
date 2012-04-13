@@ -67,10 +67,12 @@ public class PMgnt {
 	}
 
 	public void printParticleLocation() {
+		int i = 1;
 		for(Particle p : particlesystem){
-			System.out.println("X_LOCATION: " + p.getLocation(0));
-			System.out.println("Y_LOCATION: " + p.getLocation(1));
+			System.out.println("X_LOCATION: " + p.getLocation(0) + " Particle:"+ i);
+			System.out.println("Y_LOCATION: " + p.getLocation(1) + " Particle:"+ i);
 			System.out.println();
+			i++;
 		}
 	}
 
