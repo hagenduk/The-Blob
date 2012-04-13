@@ -16,7 +16,9 @@ import testParticleSystem.PhysicEngine;
 			while(i<100){
 			pe.run();
 			pm.printParticleLocation();
+			for(int x = 0; x < 100000; x++);
 			i++;
+			t1.repaint();
 			}
 			
 //			for(Particle p :pm.particlesystem){
