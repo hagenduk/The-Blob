@@ -3,14 +3,23 @@ package testParticleSystem;
 
 public class PhysicEngine {
 	
-	private final float ABSORB=0.9f;//Absorption
+	
+	private final float ABSORB=0.2f;//Absorption
 	private final float GRAVITY=3.0f;//Physical Gravity constant
 	//private final float ELASTICITY=0.9f;//Elasticity
-	private final float QUANTUM=0.1f;//Quantum
+	private final float QUANTUM=5f;//Quantum
 	private final float CONSTANT=1000.0f;//Constant for Physic Functions
+	private Particle[] pm;
+	private int max_x;
+	private int max_y;
 	
+	PhysicEngine(Particle[] pm,int x, int y){
+		this.pm=pm;
+		this.max_x=x;
+		this.max_y=y;
+	}
 	
-	public void run(Particle[] pm){
+	public void run(){
 		float[][][] Matrix = createMatrix(pm);//Create Matrix
 		int p=0;//Current Particle
 		while(p<pm.length){
@@ -64,6 +73,8 @@ public class PhysicEngine {
 		//Set velocity
 		particle.setSpeed(0, particle.getSpeed(0)+a[0]*ABSORB);
 		particle.setSpeed(1, particle.getSpeed(1)+a[1]*ABSORB);
+		//Collision Detection
+		collisionDetection(max_x,max_y,particle);
 		//Set location
 		particle.setLocation(0, particle.getLocation(0)+Math.round(particle.getSpeed(0)));
 		particle.setLocation(1, particle.getLocation(1)+Math.round(particle.getSpeed(1)));
@@ -168,6 +179,20 @@ public class PhysicEngine {
 		result[1]=(p1.getLocation(1)-p2.getLocation(1));
 		result[2]=(int) Math.sqrt((result[0]*result[0])+(result[1]*result[1]));
 		return result;
+	}
+	/**
+	 * Checks for Collision with given Max ranges and zero and negates velocity if Collision detected
+	 * @param x Maximum x Coordinate
+	 * @param y Maximum y Coordinate
+	 * @param p Particle
+	 */
+	private void collisionDetection(int x, int y, Particle p){
+		if(p.getLocation(0)+Math.round(p.getSpeed(0))>x || p.getLocation(0)+Math.round(p.getSpeed(0))<0){
+			p.setSpeed(0, -p.getSpeed(0));
+		}
+		if(p.getLocation(1)+Math.round(p.getSpeed(1))>y || p.getLocation(1)+Math.round(p.getSpeed(1))<0){
+			p.setSpeed(1, -p.getSpeed(1));
+		}
 	}
 	
 	
