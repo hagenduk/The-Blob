@@ -12,7 +12,11 @@ import testParticleSystem.PhysicEngine;
 			t1.setSize(500,500);
 			t1.setVisible(true);
 			PhysicEngine pe = new PhysicEngine();
+			int i=0;
+			while(i<100){
 			pe.run(pm.particlesystem);
+			i++;
+			}
 			
 //			for(Particle p :pm.particlesystem){
 //				p.setLocation(0, p.getLocation(0)+100);

@@ -1,6 +1,5 @@
 package testParticleSystem;
 
-import sleimiPrototype.Particle;
 
 public class PhysicEngine {
 	
@@ -8,6 +7,7 @@ public class PhysicEngine {
 	private final float GRAVITY=3.0f;//Physical Gravity constant
 	//private final float ELASTICITY=0.9f;//Elasticity
 	private final float QUANTUM=0.1f;//Quantum
+	private final float CONSTANT=1000.0f;//Constant for Physic Functions
 	
 	
 	public void run(Particle[] pm){
@@ -16,12 +16,12 @@ public class PhysicEngine {
 		while(p<pm.length){
 			int i=0;//Particle for comparison
 			int r[]; //Distance/Radius
-			float[] a;
+			float[] a = new float[2];
 			while(i<pm.length){
 				if (i==p){//Don't do anything if compared with itself, array is initialised with zero, should be fine
 					i++;
 				}else{
-					if(Matrix[p][i][2]!=0){//If distance!=0 it was already set
+					if(Matrix[p][i][1]!=0){//If distance!=0 it was already set
 						i++;
 					}else{
 						r=get_Distance(pm[p],pm[i]);//Get Distance
@@ -31,8 +31,8 @@ public class PhysicEngine {
 							//Reverse a and input it into Matrix for pm[i]->pm[p]
 							a[0]=-a[0];
 							a[1]=-a[1];
-							a[2]=-a[2];
 							Matrix[i][p]=a;
+							i++;
 						}else{
 							if(r[2]>pm[p].OUTER_RAD){//Gravitation
 								a=get_Gravitation(r);
@@ -40,12 +40,11 @@ public class PhysicEngine {
 								//Reverse a and input it into Matrix for pm[i]->pm[p]
 								a[0]=-a[0];
 								a[1]=-a[1];
-								a[2]=-a[2];
 								Matrix[i][p]=a;
+								i++;
 							}
 						}
 					}
-					i++;
 				}
 			}
 			float[] absoluteVector=get_absoluteVector(Matrix,p, pm.length);//Absolutvektor für p berechnen
@@ -85,6 +84,7 @@ public class PhysicEngine {
 		while(i<length){
 			a[0]=a[0]+matrix[p][i][0];//add xVector
 			a[1]=a[1]+matrix[p][i][1];//add yVector
+			i++;
 		}
 		return a;
 	}
@@ -100,9 +100,11 @@ public class PhysicEngine {
 	 */
 	private float[] get_Gravitation(int r[]){
 		float[] a = new float[2];
-		a[0]=(GRAVITY*(1/(r[0]*r[0])));//1 in the numerator can't be right
+		float tmp = r[0]*r[0];
+		a[0]=(GRAVITY*(CONSTANT/(tmp)));//1 in the numerator can't be right
 		if(r[0]<0){a[0]*=-1;}
-		a[1]=(GRAVITY*(1/(r[1]*r[1])));//1 in the numerator can't be right
+		tmp = (r[1]*r[1]);
+		a[1]=(GRAVITY*(CONSTANT/(tmp)));//1 in the numerator can't be right
 		if(r[1]<0){a[1]*=-1;}
 		return a;
 	}
@@ -123,9 +125,11 @@ public class PhysicEngine {
 	 */
 	private float[] get_Repulsion(int r[]){//Add constant, and make r much smaller
 		float[] a= new float[2];
-		a[0]=1/r[0]*r[0];
+		float tmp = (r[0]*r[0]);
+		a[0]=CONSTANT/tmp;
 		if(r[0]>0){a[0]*=-1;}
-		a[1]=1/r[1]*r[1];
+		tmp = (r[1]*r[1]);
+		a[1]=CONSTANT/tmp;
 		if(r[0]>0){a[0]*=-1;}
 		return a;
 	}
