@@ -3,12 +3,29 @@ package testParticleSystem;
 
 public class PhysicEngine {
 	
-	
-	private final float ABSORB=0.2f;//Absorption
-	private final float GRAVITY=3.0f;//Physical Gravity constant
-	//private final float ELASTICITY=0.9f;//Elasticity
-	private final float QUANTUM=5f;//Quantum
-	private final float CONSTANT=1000.0f;//Constant for Physic Functions
+	/**
+	 * Is used to slow the particles down. 
+	 * The smaller Absorb the more the Particles will be slowed down
+	 */
+	private final float ABSORB=0.2f;
+	/**
+	 * Used in physic equations, represents the gravitational constant of every object
+	 */
+	private final float GRAVITY=3.0f;
+	/**
+	 * Used in physic equations, like strength of a spring, 
+	 * the higher Elasitcity, the faster the Particle will be accelerated
+	 */
+	//private final float ELASTICITY=0.9f;
+	/**
+	 * Determines the minimum velocity for a particle,
+	 * if a Particle has a velocity smaller than this value it will be set to zero
+	 */
+	private final float QUANTUM=5f;
+	/**
+	 * Used in physic equations, the higher constant the faster the particle
+	 */
+	private final float CONSTANT=1000.0f;
 	private Particle[] pm;
 	private int max_x;
 	private int max_y;
@@ -18,14 +35,25 @@ public class PhysicEngine {
 		this.max_x=x;
 		this.max_y=y;
 	}
-	
+	/**
+	 * Creates a 2 dimensional Matrix which represents how the particles push/pull each other
+	 * It stores acceleration vectors (x,y)
+	 * Each Particle is checked with every other Particle, Distance is calculated and depending
+	 * on distance either gravitation or repulsion is invoked.
+	 * After the completion of one row the absolute vector for the particle is calculated in a matter
+	 * (P1xP2)+(P1xP3)+...+(P1xPn) = P1_absolute
+	 * Afterwards this Particle is accelerated, absorption applied and quantumcheck performed to stop 
+	 * a possible minor shiver of the Sleimi. Before the Particle is set to its new location the 
+	 * collisionDetection checks if it would go past the borders, if so its velocity direction is negated.
+	 *  
+	 */
 	public void run(){
 		float[][][] Matrix = createMatrix(pm);//Create Matrix
 		int p=0;//Current Particle
 		while(p<pm.length){
 			int i=0;//Particle for comparison
 			int r[]; //Distance/Radius
-			float[] a = new float[2];
+			float[] a = new float[2];//acceleration vector
 			while(i<pm.length){
 				if (i==p){//Don't do anything if compared with itself, array is initialised with zero, should be fine
 					i++;
@@ -33,11 +61,11 @@ public class PhysicEngine {
 					if(Matrix[p][i][1]!=0){//If distance!=0 it was already set
 						i++;
 					}else{
-						r=get_Distance(pm[p],pm[i]);//Get Distance
+						r=get_Distance(pm[p],pm[i]);
 						if(r[2]<=pm[p].OUTER_RAD){//Repulsion
 							a=get_Repulsion(r);//REMEMBER! pm[p]->pm[i]
 							Matrix[p][i]=a;//Store acceleration Vector in Matrix
-							//Reverse a and input it into Matrix for pm[i]->pm[p]
+							//Reverse a[] and input it into Matrix for pm[i]->pm[p]
 							a[0]=-a[0];
 							a[1]=-a[1];
 							Matrix[i][p]=a;
@@ -56,9 +84,8 @@ public class PhysicEngine {
 					}
 				}
 			}
-			float[] absoluteVector=get_absoluteVector(Matrix,p, pm.length);//Absolutvektor für p berechnen
-			systemIteration(pm[p],absoluteVector);//Iterationsschritt für p, kräfte auf v auswirken lassen und dämpfen
-			quantumCheck(pm[p]);//Quantumcheck für p um Stillstand zu erreichen
+			float[] absoluteVector=get_absoluteVector(Matrix,p, pm.length);
+			systemIteration(pm[p],absoluteVector);
 			p++;
 		}
 	}
@@ -73,11 +100,14 @@ public class PhysicEngine {
 		//Set velocity
 		particle.setSpeed(0, particle.getSpeed(0)+a[0]*ABSORB);
 		particle.setSpeed(1, particle.getSpeed(1)+a[1]*ABSORB);
-		//Collision Detection
-		collisionDetection(max_x,max_y,particle);
-		//Set location
-		particle.setLocation(0, particle.getLocation(0)+Math.round(particle.getSpeed(0)));
-		particle.setLocation(1, particle.getLocation(1)+Math.round(particle.getSpeed(1)));
+		//Quantum Check
+		if(!quantumCheck(particle)){
+			//Collision Detection
+			collisionDetection(max_x,max_y,particle);
+			//Set location
+			particle.setLocation(0, particle.getLocation(0)+Math.round(particle.getSpeed(0)));
+			particle.setLocation(1, particle.getLocation(1)+Math.round(particle.getSpeed(1)));
+		}
 	}
 
 
@@ -86,8 +116,8 @@ public class PhysicEngine {
 	 * 
 	 * @param matrix
 	 * @param p
-	 * @param length
-	 * @return The absolute x,y Vector for a particle
+	 * @param length Number of Particles in the pm
+	 * @return The absolute x,y acceleration-Vector for a particle
 	 */
 	private float[] get_absoluteVector(float[][][] matrix,int p,int length) {
 		int i=0;
@@ -112,10 +142,10 @@ public class PhysicEngine {
 	private float[] get_Gravitation(int r[]){
 		float[] a = new float[2];
 		float tmp = r[0]*r[0];
-		a[0]=(GRAVITY*(CONSTANT/(tmp)));//1 in the numerator can't be right
+		a[0]=(GRAVITY*(CONSTANT/(tmp)));
 		if(r[0]<0){a[0]*=-1;}
 		tmp = (r[1]*r[1]);
-		a[1]=(GRAVITY*(CONSTANT/(tmp)));//1 in the numerator can't be right
+		a[1]=(GRAVITY*(CONSTANT/(tmp)));
 		if(r[1]<0){a[1]*=-1;}
 		return a;
 	}
@@ -134,7 +164,7 @@ public class PhysicEngine {
 	 * @param r[] array containing distances in x,y direction and overall distance
 	 * @return float representation of the acceleration between two particles
 	 */
-	private float[] get_Repulsion(int r[]){//Add constant, and make r much smaller
+	private float[] get_Repulsion(int r[]){
 		float[] a= new float[2];
 		float tmp = (r[0]*r[0]);
 		a[0]=CONSTANT/tmp;
@@ -145,16 +175,27 @@ public class PhysicEngine {
 		return a;
 	}
 	
+
 	/**
 	 * Checks for a velocity<QUANTUM and sets the velocity 0 if true
 	 * @param p Particle
+	 * @return true if x and y velocity have been zero'd
 	 */
-	private void quantumCheck(Particle p){
+	private boolean quantumCheck(Particle p){
+		boolean result1=false;
+		boolean result2=false;
 		if (p.getSpeed(0)<QUANTUM){//Check both velocities or seperately??
 			p.setSpeed(0, 0);
+			result1=true;
 		}
 		if (p.getSpeed(1)<QUANTUM){//Check both velocities or seperately??
 			p.setSpeed(1, 0);
+			result2=true;
+		}
+		if(result1&&result2){
+			return true;
+		}else{
+			return false;
 		}
 		
 	}
@@ -171,7 +212,7 @@ public class PhysicEngine {
 	 * Calculates distance between two particles
 	 * @param p1 Particle
 	 * @param p2 Particle
-	 * @return 3-dimensional array of integer containing 0=Vector_x, 1=Vector_y 2=Distance
+	 * @return array of integer containing 0=Vector_x, 1=Vector_y 2=Distance
 	 */
 	private int[] get_Distance(Particle p1, Particle p2){
 		int[] result = new int[3];
