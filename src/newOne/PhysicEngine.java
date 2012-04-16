@@ -1,6 +1,10 @@
 package newOne;
 
-
+/**
+ * 
+ * @author eifinger
+ *
+ */
 public class PhysicEngine {
 	
 	/**
@@ -47,48 +51,37 @@ public class PhysicEngine {
 	 * collisionDetection checks if it would go past the borders, if so its velocity direction is negated.
 	 */
 	public void run(){
-		float[][][] Matrix = createMatrix(pm);//Create Matrix
+		float[] new_vector = new float[2];//new acceleration vector for a particle summarisation of tmp_vector
+		float[] tmp_vector = new float[2];//acceleration vector between 2 particles
 		int p=0;//Current Particle
 		while(p<pm.length){
 			int i=0;//Particle for comparison
 			int r[]; //Distance/Radius
-			float[] a = new float[2];//acceleration vector ERROR!
+			tmp_vector = new float[2];//acceleration vector
 			while(i<pm.length){
 				if (i==p){//Don't do anything if compared with itself, array is initialised with zero, should be fine
 					i++;
 				}else{
-					if(Matrix[p][i][1]!=0){//If distance!=0 it was already set
+					r=get_Distance(pm[p],pm[i]);
+					if(r[2]<=pm[p].OUTER_RAD){//Repulsion
+						tmp_vector=get_Repulsion(r);
+						new_vector[0]+=tmp_vector[0];
+						new_vector[1]+=tmp_vector[1];
 						i++;
 					}else{
-						r=get_Distance(pm[p],pm[i]);
-						if(r[2]<=pm[p].OUTER_RAD){//Repulsion
-							a=get_Repulsion(r);//REMEMBER! pm[p]->pm[i]
-							Matrix[p][i]=a;//Store acceleration Vector in Matrix
-							//Reverse a[] and input it into Matrix for pm[i]->pm[p]
-							a[0]*=-1;
-							a[1]*=-1;
-							Matrix[i][p]=a;
+						if(r[2]>pm[p].OUTER_RAD){//Gravitation
+							tmp_vector=get_Gravitation(r);
+							new_vector[0]+=tmp_vector[0];
+							new_vector[1]+=tmp_vector[1];
 							i++;
-						}else{
-							if(r[2]>pm[p].OUTER_RAD){//Gravitation
-								a=get_Gravitation(r);
-								Matrix[p][i]=a;//Store acceleration Vector in Matrix
-								//Reverse a and input it into Matrix for pm[i]->pm[p]
-								a[0]*=-1;
-								a[1]*=-1;
-								Matrix[i][p][0]=a[0];
-								Matrix[i][p][1]=a[1];
-								i++;
-							}
 						}
 					}
 				}
 			}
-			float[] absoluteVector=get_absoluteVector(Matrix,p, pm.length);
-			systemIteration(pm[p],absoluteVector);
+		}
+			systemIteration(pm[p],tmp_vector);
 			p++;
 		}
-	}
 
 
 	/**
@@ -113,25 +106,6 @@ public class PhysicEngine {
 		}
 	}
 
-
-	/**
-	 * Takes the Matrix of interactive Forces and generates the absolute vector for particle p
-	 * 
-	 * @param matrix
-	 * @param p
-	 * @param length Number of Particles in the pm
-	 * @return The absolute x,y acceleration-Vector for a particle
-	 */
-	private float[] get_absoluteVector(float[][][] matrix,int p,int length) {
-		int i=0;
-		float[] a= new float[2];//absoluteVector
-		while(i<length){
-			a[0]=a[0]+matrix[p][i][0];//add xVector
-			a[1]=a[1]+matrix[p][i][1];//add yVector
-			i++;
-		}
-		return a;
-	}
 
 
 	/**
@@ -202,28 +176,9 @@ public class PhysicEngine {
 		}
 		
 	}
-	/**
-	 * Creates a Matrix for storing the interactive forces between all particles
-	 * @param pm Particlemanagment
-	 * @return A 2 dimensional Matrix of size pm.length storing arrays of length 2
-	 */
-	private float[][][] createMatrix(Particle[] pm){
-		float[][][] Matrix = new float[pm.length][pm.length][2];//3-dimensional Matrix storing acceleration vectors
-		return Matrix;
-	}
-	/**
-	 * Calculates distance between two particles
-	 * @param p1 Particle
-	 * @param p2 Particle
-	 * @return array of integer containing 0=Vector_x, 1=Vector_y 2=Distance
-	 */
-	private int[] get_Distance(Particle p1, Particle p2){
-		int[] result = new int[3];
-		result[0]=(p1.getLocation(0)-p2.getLocation(0));
-		result[1]=(p1.getLocation(1)-p2.getLocation(1));
-		result[2]=(int) Math.sqrt((result[0]*result[0])+(result[1]*result[1]));
-		return result;
-	}
+	
+
+	
 	/**
 	 * Checks for Collision with given Max ranges and zero and negates velocity if Collision detected
 	 * @param x Maximum x Coordinate

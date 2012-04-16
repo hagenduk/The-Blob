@@ -28,6 +28,20 @@ public class Particle {
 		this.speed[0] = x_speed;
 		this.speed[1] = y_speed;
 	}
+	
+	/**
+	 * Calculates distance between two particles
+	 * @param p1 Particle
+	 * @param p2 Particle
+	 * @return array of integer containing 0=Vector_x, 1=Vector_y 2=Distance
+	 */
+	public int[] getDistance(Particle p){
+		int[] result = new int[3];
+		result[0]=(this.getLocation(0)-p.getLocation(0));
+		result[1]=(this.getLocation(1)-p.getLocation(1));
+		result[2]=(int) Math.sqrt((result[0]*result[0])+(result[1]*result[1]));
+		return result;
+	}
 
 
 }
