@@ -7,12 +7,13 @@ public class Particle {
 	private float[] speed = {0.0f, 0.0f};
 
 	Particle(int pos_x, int pos_y) {
-		location[0] = pos_x;
-		location[1] = pos_y;
+		this.location[0] = pos_x;
+		this.location[1] = pos_y;
 	}
 
-	public void setLocation(int direction, int newcoord) {
-		this.location[direction] = newcoord;
+	public void setLocation(int x_loc, int y_loc) {
+		this.location[0] = x_loc;
+		this.location[1] = y_loc;
 	}
 
 	public int getLocation(int direction) {
@@ -23,8 +24,9 @@ public class Particle {
 		return speed[direction];
 	}
 
-	public void setSpeed(int direction, float newspeed) {
-		speed[direction] = newspeed;
+	public void setSpeed(float x_speed, float y_speed) {
+		this.speed[0] = x_speed;
+		this.speed[1] = y_speed;
 	}
 
 
