@@ -22,8 +22,8 @@ public class PMgnt {
 
 	private void createParticle() {
 		boolean done = false;
-		pos_x = (int) ((Math.random())*area_x);
-		pos_y = (int) ((Math.random())*area_y);
+		pos_x = (int) ((Math.random()+1)*area_x);
+		pos_y = (int) ((Math.random()+1)*area_y);
 		particlesystem[0] = new Particle(pos_x,pos_y);
 		particleCounter++;
 		for(int i = 1; i < system_size; i++){

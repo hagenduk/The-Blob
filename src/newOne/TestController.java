@@ -3,11 +3,20 @@ package newOne;
 	public class TestController{
 
 	    public static void main(String str[]) {
-	    	PMgnt pm = new PMgnt(2,200,200,1);
+	    	PMgnt pm = new PMgnt(2,200,200,10);
 			TestParticleGUI t1 = new TestParticleGUI(pm,20);
-			t1.setSize(200,200);
+			t1.setSize(400,400);
 			t1.setVisible(true);
-	    	
+			PhysicEngine pe = new PhysicEngine(pm.particlesystem,400,400);
+			int i=0;
+			while(i<100){
+			pe.run();
+			pm.printParticleLocation();
+			pm.printParticleLocation();
+			for(int x = 0; x < 100000; x++);
+			i++;
+			t1.repaint();
+			}
 	    	
 	    	
 	    	

@@ -11,7 +11,7 @@ public class PhysicEngine {
 	 * Is used to slow the particles down. 
 	 * The smaller Absorb the more the Particles will be slowed down
 	 */
-	private final float ABSORB=0.2f;
+	private final float ABSORB=0.9f;
 	/**
 	 * Used in physic equations, represents the gravitational constant of every object
 	 */
@@ -25,11 +25,11 @@ public class PhysicEngine {
 	 * Determines the minimum velocity for a particle,
 	 * if a Particle has a velocity smaller than this value it will be set to zero
 	 */
-	private final float QUANTUM=5f;
+	private final float QUANTUM=0.2f;
 	/**
 	 * Used in physic equations, the higher constant the faster the particle
 	 */
-	private final float CONSTANT=1000.0f;
+	private final float CONSTANT=4000.0f;
 	private Particle[] pm;
 	private int max_x;
 	private int max_y;
@@ -57,7 +57,7 @@ public class PhysicEngine {
 		while(p<pm.length){
 			int i=0;//Particle for comparison
 			int r[]; //Distance/Radius
-			tmp_vector = new float[2];//acceleration vector
+			new_vector = new float[2];//acceleration vector
 			while(i<pm.length){
 				if (i==p){//Don't do anything if compared with itself, array is initialised with zero, should be fine
 					i++;
@@ -78,9 +78,9 @@ public class PhysicEngine {
 					}
 				}
 			}
-		}
-			systemIteration(pm[p],tmp_vector);
+			systemIteration(pm[p],new_vector);
 			p++;
+		}	
 		}
 
 
@@ -162,11 +162,11 @@ public class PhysicEngine {
 		boolean result1=false;
 		boolean result2=false;
 		if (Math.abs(p.getSpeed(0))<QUANTUM){//Check both velocities or seperately??
-			p.setSpeed(0, 0);
+			p.setSpeed(0, p.getSpeed(1));
 			result1=true;
 		}
 		if (Math.abs(p.getSpeed(1))<QUANTUM){//Check both velocities or seperately??
-			p.setSpeed(1, 0);
+			p.setSpeed(p.getSpeed(0), 0);
 			result2=true;
 		}
 		if(result1&&result2){
@@ -185,10 +185,10 @@ public class PhysicEngine {
 	 */
 	private void collisionDetection(int x, int y, Particle p){
 		if(p.getLocation(0)+Math.round(p.getSpeed(0))>x || p.getLocation(0)+Math.round(p.getSpeed(0))<0){
-			p.setSpeed(0, -p.getSpeed(0));
+			p.setSpeed(-p.getSpeed(0),p.getSpeed(1));
 		}
 		if(p.getLocation(1)+Math.round(p.getSpeed(1))>y || p.getLocation(1)+Math.round(p.getSpeed(1))<0){
-			p.setSpeed(1, -p.getSpeed(1));
+			p.setSpeed(p.getSpeed(0), -p.getSpeed(1));
 		}
 	}
 	
