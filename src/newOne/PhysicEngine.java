@@ -11,7 +11,7 @@ public class PhysicEngine {
 	 * Is used to slow the particles down. 
 	 * The smaller Absorb the more the Particles will be slowed down
 	 */
-	private final float ABSORB=0.9f;
+	private final float ABSORB=0.5f;
 	/**
 	 * Used in physic equations, represents the gravitational constant of every object
 	 */
@@ -96,7 +96,7 @@ public class PhysicEngine {
 		if(a[0]<-20){a[0]=-20;}
 		if(a[1]>20){a[1]=20;}
 		if(a[1]<-20){a[1]=-20;}
-		particle.setSpeed(particle.getSpeed(0)+a[0]*ABSORB, particle.getSpeed(1)+a[1]*ABSORB);
+		particle.setSpeed((particle.getSpeed(0)+a[0]*-1)*ABSORB, (particle.getSpeed(1)+a[1]*-1)*ABSORB);
 		//Quantum Check
 		if(!quantumCheck(particle)){
 			//Collision Detection
