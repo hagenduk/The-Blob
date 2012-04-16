@@ -90,19 +90,29 @@ public class PhysicEngine {
 	 * @param a
 	 */
 	private void systemIteration(Particle particle, float[] a) {
-		//For Debugging
-		System.out.println(a[0]);
-		System.out.println(a[1]);
-		System.out.println(particle.getLocation(0));
 		//Set velocity
+		//Max velocity
+		if(a[0]>20){a[0]=20;}
+		if(a[0]<-20){a[0]=-20;}
+		if(a[1]>20){a[1]=20;}
+		if(a[1]<-20){a[1]=-20;}
 		particle.setSpeed(particle.getSpeed(0)+a[0]*ABSORB, particle.getSpeed(1)+a[1]*ABSORB);
 		//Quantum Check
 		if(!quantumCheck(particle)){
 			//Collision Detection
 			collisionDetection(max_x,max_y,particle);
 			//Set location
-			particle.setLocation(particle.getLocation(0)+Math.round(particle.getSpeed(0)), 
-					particle.getLocation(1)+Math.round(particle.getSpeed(1)));
+			int x=Math.round(particle.getSpeed(0));
+			int y=Math.round(particle.getSpeed(1));
+			int posx=particle.getLocation(0);
+			int posy=particle.getLocation(1);
+			System.out.println(posx);
+			System.out.println(posy);
+			particle.setLocation(particle.getLocation(0)+x,particle.getLocation(1)+y);
+			posx=particle.getLocation(0);
+			posy=particle.getLocation(1);
+			System.out.println(posx);
+			System.out.println(posy);
 		}
 	}
 
