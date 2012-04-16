@@ -62,7 +62,7 @@ public class PhysicEngine {
 				if (i==p){//Don't do anything if compared with itself, array is initialised with zero, should be fine
 					i++;
 				}else{
-					r=get_Distance(pm[p],pm[i]);
+					r=pm[p].getDistance(pm[i]);
 					if(r[2]<=pm[p].OUTER_RAD){//Repulsion
 						tmp_vector=get_Repulsion(r);
 						new_vector[0]+=tmp_vector[0];
@@ -176,8 +176,6 @@ public class PhysicEngine {
 		}
 		
 	}
-	
-
 	
 	/**
 	 * Checks for Collision with given Max ranges and zero and negates velocity if Collision detected
