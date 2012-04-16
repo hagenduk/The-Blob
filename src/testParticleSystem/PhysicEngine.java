@@ -14,7 +14,7 @@ public class PhysicEngine {
 	private final float GRAVITY=3.0f;
 	/**
 	 * Used in physic equations, like strength of a spring, 
-	 * the higher Elasitcity, the faster the Particle will be accelerated
+	 * the higher Elasticity, the faster the Particle will be accelerated
 	 */
 	//private final float ELASTICITY=0.9f;
 	/**
@@ -45,7 +45,6 @@ public class PhysicEngine {
 	 * Afterwards this Particle is accelerated, absorption applied and quantumcheck performed to stop 
 	 * a possible minor shiver of the Sleimi. Before the Particle is set to its new location the 
 	 * collisionDetection checks if it would go past the borders, if so its velocity direction is negated.
-	 *  
 	 */
 	public void run(){
 		float[][][] Matrix = createMatrix(pm);//Create Matrix
@@ -53,7 +52,7 @@ public class PhysicEngine {
 		while(p<pm.length){
 			int i=0;//Particle for comparison
 			int r[]; //Distance/Radius
-			float[] a = new float[2];//acceleration vector
+			float[] a = new float[2];//acceleration vector ERROR!
 			while(i<pm.length){
 				if (i==p){//Don't do anything if compared with itself, array is initialised with zero, should be fine
 					i++;
@@ -66,8 +65,8 @@ public class PhysicEngine {
 							a=get_Repulsion(r);//REMEMBER! pm[p]->pm[i]
 							Matrix[p][i]=a;//Store acceleration Vector in Matrix
 							//Reverse a[] and input it into Matrix for pm[i]->pm[p]
-							a[0]=-a[0];
-							a[1]=-a[1];
+							a[0]*=-1;
+							a[1]*=-1;
 							Matrix[i][p]=a;
 							i++;
 						}else{
@@ -75,9 +74,10 @@ public class PhysicEngine {
 								a=get_Gravitation(r);
 								Matrix[p][i]=a;//Store acceleration Vector in Matrix
 								//Reverse a and input it into Matrix for pm[i]->pm[p]
-								a[0]=-a[0];
-								a[1]=-a[1];
-								Matrix[i][p]=a;
+								a[0]*=-1;
+								a[1]*=-1;
+								Matrix[i][p][0]=a[0];
+								Matrix[i][p][1]=a[1];
 								i++;
 							}
 						}
@@ -97,17 +97,20 @@ public class PhysicEngine {
 	 * @param a
 	 */
 	private void systemIteration(Particle particle, float[] a) {
+		System.out.println(a[0]);
+		System.out.println(a[1]);
+		System.out.println(particle.getLocation(0));
 		//Set velocity
 		particle.setSpeed(0, particle.getSpeed(0)+a[0]*ABSORB);
 		particle.setSpeed(1, particle.getSpeed(1)+a[1]*ABSORB);
 		//Quantum Check
-		if(!quantumCheck(particle)){
+		//if(!quantumCheck(particle)){
 			//Collision Detection
 			collisionDetection(max_x,max_y,particle);
 			//Set location
 			particle.setLocation(0, particle.getLocation(0)+Math.round(particle.getSpeed(0)));
 			particle.setLocation(1, particle.getLocation(1)+Math.round(particle.getSpeed(1)));
-		}
+		//}
 	}
 
 
@@ -184,11 +187,11 @@ public class PhysicEngine {
 	private boolean quantumCheck(Particle p){
 		boolean result1=false;
 		boolean result2=false;
-		if (p.getSpeed(0)<QUANTUM){//Check both velocities or seperately??
+		if (Math.abs(p.getSpeed(0))<QUANTUM){//Check both velocities or seperately??
 			p.setSpeed(0, 0);
 			result1=true;
 		}
-		if (p.getSpeed(1)<QUANTUM){//Check both velocities or seperately??
+		if (Math.abs(p.getSpeed(1))<QUANTUM){//Check both velocities or seperately??
 			p.setSpeed(1, 0);
 			result2=true;
 		}

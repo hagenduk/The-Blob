@@ -9,7 +9,7 @@ import testParticleSystem.PhysicEngine;
 			pm.printParticleLocation();
 			
 			TestParticleGUI t1 = new TestParticleGUI(pm,20);
-			t1.setSize(600,600);
+			t1.setSize(200,200);
 			t1.setVisible(true);
 			PhysicEngine pe = new PhysicEngine(pm.particlesystem,200,200);
 			int i=0;
