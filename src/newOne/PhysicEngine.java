@@ -1,5 +1,6 @@
 package newOne;
 
+
 /**
  * 
  * @author eifinger
@@ -51,6 +52,7 @@ public class PhysicEngine {
 	 * collisionDetection checks if it would go past the borders, if so its velocity direction is negated.
 	 */
 	public void run(){
+		float[][] matrix = createMatrix(pm);//Create Matrix
 		float[] new_vector = new float[2];//new acceleration vector for a particle summarisation of tmp_vector
 		float[] tmp_vector = new float[2];//acceleration vector between 2 particles
 		int p=0;//Current Particle
@@ -64,12 +66,14 @@ public class PhysicEngine {
 				}else{
 					r=pm[p].getDistance(pm[i]);
 					if(r[2]<=pm[p].OUTER_RAD){//Repulsion
+						System.out.println("Repulsion");
 						tmp_vector=get_Repulsion(r);
 						new_vector[0]+=tmp_vector[0];
 						new_vector[1]+=tmp_vector[1];
 						i++;
 					}else{
 						if(r[2]>pm[p].OUTER_RAD){//Gravitation
+							System.out.println("Gravitation");
 							tmp_vector=get_Gravitation(r);
 							new_vector[0]+=tmp_vector[0];
 							new_vector[1]+=tmp_vector[1];
@@ -78,9 +82,10 @@ public class PhysicEngine {
 					}
 				}
 			}
-			systemIteration(pm[p],new_vector);
+			matrix[p]=new_vector;
 			p++;
-		}	
+		}
+		systemIteration(matrix, pm.length);
 		}
 
 
@@ -89,30 +94,27 @@ public class PhysicEngine {
 	 * @param particle
 	 * @param a
 	 */
-	private void systemIteration(Particle particle, float[] a) {
-		//Set velocity
+	private void systemIteration(float[][] matrix, int length) {
+		int p=0;
+		while(p<length){
 		//Max velocity
-		if(a[0]>20){a[0]=20;}
-		if(a[0]<-20){a[0]=-20;}
-		if(a[1]>20){a[1]=20;}
-		if(a[1]<-20){a[1]=-20;}
-		particle.setSpeed((particle.getSpeed(0)+a[0]*-1)*ABSORB, (particle.getSpeed(1)+a[1]*-1)*ABSORB);
+		int orad=pm[0].OUTER_RAD;
+		if(matrix[p][0]>orad){matrix[p][0]=orad;}
+		if(matrix[p][0]<-orad){matrix[p][0]=-orad;}
+		if(matrix[p][1]>orad){matrix[p][1]=orad;}
+		if(matrix[p][1]<-orad){matrix[p][1]=-orad;}
+		//Set velocity
+		pm[p].setSpeed((pm[p].getSpeed(0)+matrix[p][0])*ABSORB*-1, (pm[p].getSpeed(1)+matrix[p][1])*ABSORB*-1);
 		//Quantum Check
-		if(!quantumCheck(particle)){
+		if(!quantumCheck(pm[p])){
 			//Collision Detection
-			collisionDetection(max_x,max_y,particle);
+			collisionDetection(max_x,max_y,pm[p]);
 			//Set location
-			int x=Math.round(particle.getSpeed(0));
-			int y=Math.round(particle.getSpeed(1));
-			int posx=particle.getLocation(0);
-			int posy=particle.getLocation(1);
-			System.out.println(posx);
-			System.out.println(posy);
-			particle.setLocation(particle.getLocation(0)+x,particle.getLocation(1)+y);
-			posx=particle.getLocation(0);
-			posy=particle.getLocation(1);
-			System.out.println(posx);
-			System.out.println(posy);
+			int x=Math.round(pm[p].getSpeed(0));
+			int y=Math.round(pm[p].getSpeed(1));
+			pm[p].setLocation(pm[p].getLocation(0)+x,pm[p].getLocation(1)+y);
+		}
+		p++;
 		}
 	}
 
@@ -200,6 +202,11 @@ public class PhysicEngine {
 		if(p.getLocation(1)+Math.round(p.getSpeed(1))>y || p.getLocation(1)+Math.round(p.getSpeed(1))<0){
 			p.setSpeed(p.getSpeed(0), -p.getSpeed(1));
 		}
+	}
+	
+	private float[][] createMatrix(Particle[] pm){
+		float[][] Matrix = new float[pm.length][2];//2-dimensional Matrix storing acceleration vectors
+		return Matrix;
 	}
 	
 	
