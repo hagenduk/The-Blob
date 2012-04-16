@@ -3,7 +3,7 @@ package newOne;
 	public class TestController{
 
 	    public static void main(String str[]) {
-	    	PMgnt pm = new PMgnt(20,200,200,20);
+	    	PMgnt pm = new PMgnt(2000,200,200,20);
 			TestParticleGUI t1 = new TestParticleGUI(pm,40);
 			t1.setSize(400,400);
 			t1.setVisible(true);
@@ -12,8 +12,8 @@ package newOne;
 			while(i<1000){
 				wait(300);	// waits for 300 ms
 					pe.run();
-					pm.printParticleLocation();
-					pm.printParticleLocation();
+//					pm.printParticleLocation();
+//					pm.printParticleLocation();
 					for(int x = 0; x < 100000; x++);
 					i++;
 					t1.repaint();

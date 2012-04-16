@@ -25,23 +25,23 @@ public class Particle {
 	}
 
 	public void setSpeed(float x_speed, float y_speed) {
-		float x_speed_abs = Math.abs(x_speed);
-		float y_speed_abs = Math.abs(y_speed);
 		
-		if((x_speed_abs > OUTER_RAD && y_speed_abs > OUTER_RAD)){
-			this.speed[0] = 10;
-			this.speed[1] = 10;
-		}else{
-			if(x_speed_abs > OUTER_RAD && y_speed_abs < OUTER_RAD){
-				this.speed[0] = 10;
-				this.speed[1] = y_speed;
-			}else{
-				if(x_speed_abs < OUTER_RAD && y_speed_abs > OUTER_RAD){
-					this.speed[0] = x_speed;
-					this.speed[1] = 10;
-				}
-			}
-		}
+		if(x_speed >= OUTER_RAD)
+			x_speed = 10;
+		if(x_speed <= (-OUTER_RAD))
+			x_speed = -10;
+		if(y_speed >= OUTER_RAD)
+			y_speed = 10;
+		if(y_speed <= (-OUTER_RAD))
+			y_speed = -10;
+		
+		this.speed[0] = x_speed;
+		this.speed[1] = y_speed;
+		
+		
+//		System.out.println("xSpeed: " + x_speed);
+//		System.out.println("ySpeed: " + y_speed);
+		
 	}
 	
 	/**
