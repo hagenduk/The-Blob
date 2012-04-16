@@ -25,8 +25,20 @@ public class Particle {
 	}
 
 	public void setSpeed(float x_speed, float y_speed) {
-		this.speed[0] = x_speed;
-		this.speed[1] = y_speed;
+		if((x_speed > 10 && y_speed > 10)){
+			this.speed[0] = 10;
+			this.speed[1] = 10;
+		}else{
+			if(x_speed > 10 && y_speed < 10){
+				this.speed[0] = 10;
+				this.speed[1] = y_speed;
+			}else{
+				if(x_speed < 10 && y_speed > 10){
+					this.speed[0] = x_speed;
+					this.speed[1] = 10;
+				}
+			}
+		}
 	}
 	
 	/**
