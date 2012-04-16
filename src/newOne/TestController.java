@@ -10,7 +10,7 @@ package newOne;
 			PhysicEngine pe = new PhysicEngine(pm.particlesystem,400,400);
 			int i=0;
 			while(i<100){
-				wait(500);
+				wait(300);	// waits for 300 ms
 					pe.run();
 					pm.printParticleLocation();
 					pm.printParticleLocation();
@@ -47,13 +47,13 @@ package newOne;
 			
 	    }
 	    
-	    public static void wait (int n){
+	    public static void wait (int timeToWait){
 	        long t0,t1;
-	        t0=System.currentTimeMillis();
+	        t0 = System.currentTimeMillis();
 	        do{
-	            t1=System.currentTimeMillis();
+	            t1 = System.currentTimeMillis();
 	        }
-	        while (t1-t0<n);
+	        while(t1 - t0 < timeToWait);
 	}
 
 	    
