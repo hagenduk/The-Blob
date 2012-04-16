@@ -2,7 +2,7 @@ package newOne;
 
 public class Particle {
 	public final int INNER_RAD = 5;//Lieber beim erstellen im PMgnt festlegen?
-	public final int OUTER_RAD = 10;//Lieber beim erstellen im PMgnt festlegen?
+	public final int OUTER_RAD = 20;//Lieber beim erstellen im PMgnt festlegen?
 	private int[] location = new int[2];
 	private float[] speed = {0.0f, 0.0f};
 
@@ -25,15 +25,18 @@ public class Particle {
 	}
 
 	public void setSpeed(float x_speed, float y_speed) {
-		if((x_speed > 10 && y_speed > 10)){
+		float x_speed_abs = Math.abs(x_speed);
+		float y_speed_abs = Math.abs(y_speed);
+		
+		if((x_speed_abs > OUTER_RAD && y_speed_abs > OUTER_RAD)){
 			this.speed[0] = 10;
 			this.speed[1] = 10;
 		}else{
-			if(x_speed > 10 && y_speed < 10){
+			if(x_speed_abs > OUTER_RAD && y_speed_abs < OUTER_RAD){
 				this.speed[0] = 10;
 				this.speed[1] = y_speed;
 			}else{
-				if(x_speed < 10 && y_speed > 10){
+				if(x_speed_abs < OUTER_RAD && y_speed_abs > OUTER_RAD){
 					this.speed[0] = x_speed;
 					this.speed[1] = 10;
 				}
