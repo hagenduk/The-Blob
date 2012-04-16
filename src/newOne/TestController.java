@@ -3,7 +3,7 @@ package newOne;
 	public class TestController{
 
 	    public static void main(String str[]) {
-	    	PMgnt pm = new PMgnt(2000,200,200,20);
+	    	PMgnt pm = new PMgnt(200,200,200,20);
 			TestParticleGUI t1 = new TestParticleGUI(pm,40);
 			t1.setSize(400,400);
 			t1.setVisible(true);

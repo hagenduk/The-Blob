@@ -27,13 +27,13 @@ public class Particle {
 	public void setSpeed(float x_speed, float y_speed) {
 		
 		if(x_speed >= OUTER_RAD)
-			x_speed = 10;
+			x_speed = 20;
 		if(x_speed <= (-OUTER_RAD))
-			x_speed = -10;
+			x_speed = -20;
 		if(y_speed >= OUTER_RAD)
-			y_speed = 10;
+			y_speed = 20;
 		if(y_speed <= (-OUTER_RAD))
-			y_speed = -10;
+			y_speed = -20;
 		
 		this.speed[0] = x_speed;
 		this.speed[1] = y_speed;
@@ -52,8 +52,8 @@ public class Particle {
 	 */
 	public int[] getDistance(Particle p){
 		int[] result = new int[3];
-		result[0]=(this.getLocation(0)-p.getLocation(0));
-		result[1]=(this.getLocation(1)-p.getLocation(1));
+		result[0]=(p.getLocation(0)-this.getLocation(0));//Falsches Vorzeichen wegen PE
+		result[1]=(p.getLocation(1)-this.getLocation(1));
 		result[2]=(int) Math.sqrt((result[0]*result[0])+(result[1]*result[1]));
 		return result;
 	}
