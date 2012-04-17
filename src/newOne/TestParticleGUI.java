@@ -5,13 +5,17 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
@@ -22,12 +26,19 @@ public class TestParticleGUI extends JWindow {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static BufferedImage texture; 
 	private PMgnt pm;
 	private int radius;
 
 	public TestParticleGUI(PMgnt pm, int radius) {
 		this.pm = pm;
 		this.radius = radius;
+		try {
+			texture = ImageIO.read( new File( "images/texture01.png" ) );
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		/**/
 
@@ -54,7 +65,7 @@ public class TestParticleGUI extends JWindow {
 		super.paint(g);
 		g.setColor(Color.green);
 		for (Particle p : pm.particlesystem) {
-			g.fillOval(p.getLocation(0), p.getLocation(1), radius, radius);
+			g.drawImage(texture,p.getLocation(0), p.getLocation(1),this);
 		}
 	}
 
