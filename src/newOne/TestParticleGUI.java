@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
@@ -30,7 +29,7 @@ public class TestParticleGUI extends JWindow {
 	private PMgnt pm;
 	private int radius;
 
-	public TestParticleGUI(PMgnt pm, int radius) {
+	public TestParticleGUI(PMgnt pm, int radius, int xarea, int yarea) {
 		this.pm = pm;
 		this.radius = radius;
 		try {
@@ -42,7 +41,7 @@ public class TestParticleGUI extends JWindow {
 
 		/**/
 
-		setSize(400,400);
+		setSize(xarea,yarea);
 		centerOnScreen(this);
 		// capture background before we add components;
 		// we need JWindows's size here and component's location must also have

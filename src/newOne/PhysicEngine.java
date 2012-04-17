@@ -66,14 +66,14 @@ public class PhysicEngine {
 				}else{
 					r=pm[p].getDistance(pm[i]);
 					if(r[2]<=pm[p].OUTER_RAD){//Repulsion
-						System.out.println("Repulsion");
+//						System.out.println("Repulsion");
 						tmp_vector=get_Repulsion(r);
 						new_vector[0]+=tmp_vector[0];
 						new_vector[1]+=tmp_vector[1];
 						i++;
 					}else{
 						if(r[2]>pm[p].OUTER_RAD){//Gravitation
-							System.out.println("Gravitation");
+//							System.out.println("Gravitation");
 							tmp_vector=get_Gravitation(r);
 							new_vector[0]+=tmp_vector[0];
 							new_vector[1]+=tmp_vector[1];
