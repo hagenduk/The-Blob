@@ -26,7 +26,7 @@ public class PhysicEngine {
 	 * Determines the minimum velocity for a particle,
 	 * if a Particle has a velocity smaller than this value it will be set to zero
 	 */
-	private final float QUANTUM=1.0f;
+	private final float QUANTUM=2.0f;
 	/**
 	 * Used in physic equations, the higher constant the faster the particle
 	 */
@@ -66,6 +66,9 @@ public class PhysicEngine {
 				}else{
 					r=pm[p].getDistance(pm[i]);
 //						System.out.println("Repulsion");
+						if(r[2]==0){
+							i++;
+						}else{
 						tmp_vector=get_Repulsion(r);
 						new_vector[0]+=tmp_vector[0];
 						new_vector[1]+=tmp_vector[1];
@@ -74,7 +77,7 @@ public class PhysicEngine {
 						new_vector[0]+=tmp_vector[0];
 						new_vector[1]+=tmp_vector[1];
 						i++;
-					}
+					}}
 				}
 			matrix[p]=new_vector;
 			p++;
@@ -104,6 +107,7 @@ public class PhysicEngine {
 		if(!quantumCheck(pm[p])){
 			//Collision Detection
 			collisionDetection(max_x,max_y,pm[p]);
+			//while(innerRadDetection(pm, p));
 			//Set location
 			int x=Math.round(pm[p].getSpeed(0));
 			int y=Math.round(pm[p].getSpeed(1));
@@ -120,6 +124,7 @@ public class PhysicEngine {
 	 * a=-(m³/kg*s²) * kg²/m²
 	 * a= kg*m/s² kg=1
 	 * a=m/s²
+	 * F=-G*MASS
 	 * @param r[] array containing distances in x,y direction
 	 * @return float representation in x and y directions of the acceleration between two particles
 	 */
@@ -149,7 +154,7 @@ public class PhysicEngine {
 	 */
 	private float[] get_Repulsion(int r[]){
 		float[] a = new float[2];
-		float dist = (r[2]-15)*(r[2]-15)*(r[2]-15)*(r[2]-15);
+		float dist = (r[2]-15)*(r[2]-15)*(r[2]-15)*(r[2]-15);//USE OUTER_RAD
 		float tmp = r[0]/Math.abs(r[2]);
 		a[0]=GRAVITY*(CONSTANT/dist)*tmp;
 		tmp = (r[1]*r[1]);
@@ -164,7 +169,7 @@ public class PhysicEngine {
 	 * @return true if x and y velocity have been zero'd
 	 */
 	private boolean quantumCheck(Particle p){
-		boolean result1=false;
+		/*boolean result1=false;
 		boolean result2=false;
 		if (Math.abs(p.getSpeed(0))<QUANTUM){//Check both velocities or seperately??
 			p.setSpeed(0, p.getSpeed(1));
@@ -178,18 +183,23 @@ public class PhysicEngine {
 			return true;
 		}else{
 			return false;
-		}
-		/*Alternative quantumCheck
+		}*/
+		
+		 //Alternative quantumCheck
 		 int v=(int) Math.sqrt(p.getSpeed(0)*p.getSpeed(0)+p.getSpeed(1)*p.getSpeed(1));
 		 if(v<QUANTUM){
 		 	p.setSpeed(0, 0);
+		 	return true;
+		 }else{
+		 	return false;
 		 }
 		 
-		 */
+		 
 		
 	}
 	
 	/**
+	 * FOR DEBUG
 	 * Checks for Collision with given Max ranges and zero and negates velocity if Collision detected
 	 * @param x Maximum x Coordinate
 	 * @param y Maximum y Coordinate
@@ -207,6 +217,31 @@ public class PhysicEngine {
 	private float[][] createMatrix(Particle[] pm){
 		float[][] Matrix = new float[pm.length][2];//2-dimensional Matrix storing acceleration vectors
 		return Matrix;
+	}
+	/**
+	 * CURRENTLY NOT USED, WILL BE ACTIVATED IF SPARE TIME IS AVAILABLE
+	 * Checks if the desired new Location of Particle p collides with inner rad of another particle
+	 * @param pm
+	 * @param p
+	 * @return true if a collision was detected
+	 */
+	private boolean innerRadDetection(Particle[] pm, int p){
+		boolean result=false;
+		int i=0;
+		int x_loc=0;//Desired new x-Location
+		int y_loc=0;//Desired new y-Location
+		Particle tmp;
+		while(i<pm.length){
+			x_loc=(int) (pm[p].getLocation(0)+pm[p].getSpeed(0));
+			y_loc=(int) (pm[p].getLocation(1)+pm[p].getSpeed(1));
+			tmp= new Particle(x_loc, y_loc);
+			if(tmp.getDistance(pm[i])[2]<pm[i].INNER_RAD*2){
+				pm[p].setSpeed(-pm[p].getSpeed(0)/2, -pm[p].getSpeed(1)/2);
+				result = true;
+			}
+			i++;
+		}
+		return result;
 	}
 	
 	
