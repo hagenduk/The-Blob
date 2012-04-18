@@ -16,6 +16,10 @@ public class Events {
 		panel = new PharmacyPanel(pm);
 	}
 
+	//Events to forward to PMgmt and PE
+	
+	//bewegen
+	//TODO
 	public void move(int x, int y) {
 		boolean check = false;
 		int resultVector_y = 0;
@@ -47,5 +51,27 @@ public class Events {
 				+ (resultVector_y * resultVector_y));
 		return distance;
 	}
+	
 
+	//Anstupsen
+	public void poke(){
+		//TODO
+	}
+	
+	//Hammer
+	public void pound(){
+		//TODO
+	}
+	
+	//verformen
+	public void deform(){
+		//TODO
+	}
+	
+	//streicheln
+	public void stroke(){
+		//TODO
+	}
+	
 }
+	
