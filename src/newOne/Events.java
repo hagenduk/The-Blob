@@ -1,6 +1,11 @@
 package newOne;
 
-public class Events {
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
+import java.awt.event.*;
+
+public class Events implements MouseMotionListener,MouseListener{
 	private PMgnt pm;
 	private int pos_x;
 	private int pos_y;
@@ -9,8 +14,8 @@ public class Events {
 	private int rad_distance = 10;
 	private int particleCounter = 200;
 	private PharmacyPanel panel;
-
-
+	
+	
 	public Events(PMgnt pm) {
 		this.pm = pm;
 		panel = new PharmacyPanel(pm);
@@ -51,27 +56,66 @@ public class Events {
 				+ (resultVector_y * resultVector_y));
 		return distance;
 	}
+
 	
 
-	//Anstupsen
-	public void poke(){
-		//TODO
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int mouse_x,mouse_y;
+		mouse_x = e.getX();
+		mouse_y = e.getY();
+		
+		//used for Hammer(optional!) and poke
+		
+		poke(mouse_x,mouse_y);
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
-	//Hammer
-	public void pound(){
-		//TODO
+	private void poke(int mouse_x, int mouse_y) {
+		// TODO Auto-generated method stub
+		//(1)partikel ansprechen mit abgefragten koordinaten
+		//(2)diesen partikel aendern
+		
+		
 	}
 	
-	//verformen
-	public void deform(){
-		//TODO
-	}
-	
-	//streicheln
-	public void stroke(){
-		//TODO
-	}
 	
 }
 	
