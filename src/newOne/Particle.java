@@ -27,13 +27,13 @@ public class Particle {
 	public void setSpeed(float x_speed, float y_speed) {
 		
 		if(x_speed >= OUTER_RAD)
-			x_speed = 20;
+			x_speed = OUTER_RAD;
 		if(x_speed <= (-OUTER_RAD))
-			x_speed = -20;
+			x_speed = -OUTER_RAD;
 		if(y_speed >= OUTER_RAD)
-			y_speed = 20;
+			y_speed = OUTER_RAD;
 		if(y_speed <= (-OUTER_RAD))
-			y_speed = -20;
+			y_speed = -OUTER_RAD;
 		
 		this.speed[0] = x_speed;
 		this.speed[1] = y_speed;

@@ -101,6 +101,7 @@ public class PhysicEngine {
 		if(matrix[p][0]<-orad){matrix[p][0]=-orad;}
 		if(matrix[p][1]>orad){matrix[p][1]=orad;}
 		if(matrix[p][1]<-orad){matrix[p][1]=-orad;}
+		
 		//Set velocity
 		pm[p].setSpeed((pm[p].getSpeed(0)+matrix[p][0])*ABSORB, (pm[p].getSpeed(1)+matrix[p][1])*ABSORB);
 		//Quantum Check
