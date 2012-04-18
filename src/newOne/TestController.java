@@ -4,8 +4,8 @@ package newOne;
 
 		private static final int XAREA = 600;			// GUI size
 		private static final int YAREA = 600;			// GUI size
-		private static final int XAREA_PART_LOC = 600; 	// Sammelpunkt der Partikel
-		private static final int YAREA_PART_LOC = 600; 	// Sammelpunkt der Partikel 
+		private static final int XAREA_PART_LOC = 200; 	// Sammelpunkt der Partikel
+		private static final int YAREA_PART_LOC = 200; 	// Sammelpunkt der Partikel 
 		private static final int XAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel
 		private static final int YAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel 
 		
