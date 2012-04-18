@@ -52,8 +52,8 @@ public class Particle {
 	 */
 	public int[] getDistance(Particle p){
 		int[] result = new int[3];
-		result[0]=(p.getLocation(0)-this.getLocation(0));//Falsches Vorzeichen wegen PE
-		result[1]=(p.getLocation(1)-this.getLocation(1));
+		result[0]=(this.getLocation(0)-p.getLocation(0));
+		result[1]=(this.getLocation(1)-p.getLocation(1));
 		result[2]=(int) Math.sqrt((result[0]*result[0])+(result[1]*result[1]));
 		return result;
 	}

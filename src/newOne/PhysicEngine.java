@@ -26,11 +26,11 @@ public class PhysicEngine {
 	 * Determines the minimum velocity for a particle,
 	 * if a Particle has a velocity smaller than this value it will be set to zero
 	 */
-	private final float QUANTUM=0.2f;
+	private final float QUANTUM=1.0f;
 	/**
 	 * Used in physic equations, the higher constant the faster the particle
 	 */
-	private final float CONSTANT=4000.0f;
+	private final float CONSTANT=3000.0f;
 	private Particle[] pm;
 	private int max_x;
 	private int max_y;
@@ -65,26 +65,21 @@ public class PhysicEngine {
 					i++;
 				}else{
 					r=pm[p].getDistance(pm[i]);
-					if(r[2]<=pm[p].OUTER_RAD){//Repulsion
 //						System.out.println("Repulsion");
 						tmp_vector=get_Repulsion(r);
 						new_vector[0]+=tmp_vector[0];
 						new_vector[1]+=tmp_vector[1];
+//						System.out.println("Gravitation");
+						tmp_vector=get_Gravitation(r);
+						new_vector[0]+=tmp_vector[0];
+						new_vector[1]+=tmp_vector[1];
 						i++;
-					}else{
-						if(r[2]>pm[p].OUTER_RAD){//Gravitation
-//							System.out.println("Gravitation");
-							tmp_vector=get_Gravitation(r);
-							new_vector[0]+=tmp_vector[0];
-							new_vector[1]+=tmp_vector[1];
-							i++;
-						}
 					}
 				}
-			}
 			matrix[p]=new_vector;
 			p++;
-		}
+			}
+			
 		systemIteration(matrix, pm.length);
 		}
 
@@ -130,12 +125,11 @@ public class PhysicEngine {
 	 */
 	private float[] get_Gravitation(int r[]){
 		float[] a = new float[2];
-		float tmp = r[0]*r[0];
-		a[0]=(GRAVITY*(CONSTANT/(tmp)));
-		if(r[0]<0){a[0]*=-1;}
-		tmp = (r[1]*r[1]);
-		a[1]=(GRAVITY*(CONSTANT/(tmp)));
-		if(r[1]<0){a[1]*=-1;}
+		float dist = r[2]*r[2];
+		float tmp = r[0]/Math.abs(r[2]);
+		a[0]=-GRAVITY*(CONSTANT/(dist))*tmp;
+		tmp = r[1]/Math.abs(r[2]);
+		a[1]=-GRAVITY*(CONSTANT/(dist))*tmp;
 		return a;
 	}
 	
@@ -154,13 +148,12 @@ public class PhysicEngine {
 	 * @return float representation of the acceleration between two particles
 	 */
 	private float[] get_Repulsion(int r[]){
-		float[] a= new float[2];
-		float tmp = (r[0]*r[0]);
-		a[0]=CONSTANT/tmp;
-		if(r[0]>0){a[0]*=-1;}
+		float[] a = new float[2];
+		float dist = (r[2]-15)*(r[2]-15)*(r[2]-15)*(r[2]-15);
+		float tmp = r[0]/Math.abs(r[2]);
+		a[0]=GRAVITY*(CONSTANT/dist)*tmp;
 		tmp = (r[1]*r[1]);
-		a[1]=CONSTANT/tmp;
-		if(r[0]>0){a[0]*=-1;}
+		a[1]=GRAVITY*(CONSTANT/dist)*tmp;
 		return a;
 	}
 	
@@ -186,6 +179,13 @@ public class PhysicEngine {
 		}else{
 			return false;
 		}
+		/*Alternative quantumCheck
+		 int v=(int) Math.sqrt(p.getSpeed(0)*p.getSpeed(0)+p.getSpeed(1)*p.getSpeed(1));
+		 if(v<QUANTUM){
+		 	p.setSpeed(0, 0);
+		 }
+		 
+		 */
 		
 	}
 	
