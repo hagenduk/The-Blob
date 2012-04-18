@@ -154,7 +154,8 @@ public class PhysicEngine {
 	 */
 	private float[] get_Repulsion(int r[]){
 		float[] a = new float[2];
-		float dist = (r[2]-15)*(r[2]-15)*(r[2]-15)*(r[2]-15);//USE OUTER_RAD
+		int orad=pm[0].OUTER_RAD/4*3;
+		float dist = (r[2]-orad)*(r[2]-orad)*(r[2]-orad)*(r[2]-orad);
 		float tmp = r[0]/Math.abs(r[2]);
 		a[0]=GRAVITY*(CONSTANT/dist)*tmp;
 		tmp = (r[1]*r[1]);
