@@ -14,11 +14,15 @@ public class Events implements MouseMotionListener,MouseListener{
 	private int rad_distance = 10;
 	private int particleCounter = 200;
 	private PharmacyPanel panel;
+	private int orad = 0;
+	private Particle particle;
 	
 	
 	public Events(PMgnt pm) {
 		this.pm = pm;
 		panel = new PharmacyPanel(pm);
+		orad = pm.particlesystem[0].OUTER_RAD;
+		
 	}
 
 	//Events to forward to PMgmt and PE
@@ -112,7 +116,22 @@ public class Events implements MouseMotionListener,MouseListener{
 		// TODO Auto-generated method stub
 		//(1)partikel ansprechen mit abgefragten koordinaten
 		//(2)diesen partikel aendern
-		
+		int xPartLocation = 0;
+		int yPartLocation = 0;
+		int distance = 0;
+
+		for (Particle p : pm.particlesystem) {
+			xPartLocation = pos_x - p.getLocation(0);
+			yPartLocation = pos_y - p.getLocation(1);
+			distance = calculateDistance(xPartLocation, yPartLocation);
+			if(distance <= orad){
+				particle = p;
+				break;
+			}
+		}
+		System.out.println(particle.getSpeed(0));
+		System.out.println(particle.getSpeed(1));
+		particle.setSpeed(20, 20);
 		
 	}
 	

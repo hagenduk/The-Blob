@@ -11,7 +11,7 @@ package newOne;
 		
 		private static final int REFRESH_TIME = 300;	// Refresh rate
 		private static final int PARTICLES = 20;		// Amount of Particles
-		private static final int PARTICLE_RADIUS = 40;  // Particle radius
+		private static final int PARTICLE_RADIUS = 20;  // Particle radius
 		
 		
 	    public static void main(String str[]) {
