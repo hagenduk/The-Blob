@@ -18,6 +18,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TestParticleGUI extends JWindow {
 
@@ -28,8 +30,60 @@ public class TestParticleGUI extends JWindow {
 	private static BufferedImage texture; 
 	private PMgnt pm;
 	private int radius;
+	private Events event;
+	
 
 	public TestParticleGUI(PMgnt pm, int radius, int xarea, int yarea) {
+		 event = new Events(pm,this);
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int mouse_x,mouse_y;
+				mouse_x = e.getX();
+				mouse_y = e.getY();
+				
+				event.poke(mouse_x, mouse_y);
+				//used for Hammer(optional!) and poke
+								
+			}
+
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		this.pm = pm;
 		this.radius = radius;
 		try {
@@ -96,5 +150,8 @@ public class TestParticleGUI extends JWindow {
 			g.drawImage(image, 0, 0, this);
 		}
 	}
+	
+	
+	
 
 }

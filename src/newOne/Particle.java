@@ -58,12 +58,12 @@ public class Particle {
 		return result;
 	}
 	
-	public int[] getDistance(int x, int y){
+	public int getDistance(int x, int y){
 		int[] result = new int[3];
 		result[0]=(this.getLocation(0)-x);
 		result[1]=(this.getLocation(1)-y);
 		result[2]=(int) Math.sqrt((result[0]*result[0])+(result[1]*result[1]));
-		return result;
+		return result[2];
 	}
 
 
