@@ -14,11 +14,22 @@ import java.awt.event.ActionEvent;
 public class PharmacyPanel extends JFrame {
 
 	private JPanel contentPane;
+	//TODO test
+	private int state=0;
+	
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
 
 	/**
 	 * Create the frame.
 	 * @param pm 
 	 */
+	
 	public PharmacyPanel(PMgnt pm) {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,10 +38,12 @@ public class PharmacyPanel extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+
 		
 		JButton btnChemie = new JButton("Chemie");
 		btnChemie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//setstate(1);
 				System.out.println("Chemie");
 			}
 		});
@@ -40,6 +53,7 @@ public class PharmacyPanel extends JFrame {
 		JButton btnHom = new JButton("Hom\u00F6");
 		btnHom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//setstate(2);
 				System.out.println("Hom�");
 			}
 		});
