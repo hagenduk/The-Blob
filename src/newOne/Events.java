@@ -59,7 +59,7 @@ public class Events{
 		}
 	}
 	
-	public void poke(int mouse_x, int mouse_y, boolean hammer) {
+	public void poke(int mouse_x, int mouse_y) {
 		// TODO Auto-generated method stub
 		//(1)partikel ansprechen mit abgefragten koordinaten
 		//(2)diesen partikel aendern
