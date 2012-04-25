@@ -42,6 +42,7 @@ public class TestParticleGUI extends JWindow {
 				mouse_x = e.getX();
 				mouse_y = e.getY();
 				
+				
 				event.poke(mouse_x, mouse_y);
 				//used for Hammer(optional!) and poke
 								
@@ -61,15 +62,35 @@ public class TestParticleGUI extends JWindow {
 			}
 
 			@Override
-			public void mousePressed(MouseEvent arg0) {
+			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
+				int mouse_x,mouse_y;
+				mouse_x = e.getX();
+				mouse_y = e.getY();
+				System.out.println("Mouse pressed on X: " + mouse_x + " Y:" + mouse_y);
 				
+				event.move(mouse_x, mouse_y, false);
+				
+				//TODO state var check whether you klicked on rand or in the middle!
+				//event.verzerren(mouse_x, mouse_y, false);
 			}
 
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
+			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
+				int mouse_x,mouse_y;
+				mouse_x = e.getX();
+				mouse_y = e.getY();
 				
+				event.move(mouse_x, mouse_y, false);
+				event.move(mouse_x, mouse_y, true);
+				
+				
+				//TODO: state var!!
+				//event.verzerren(mouse_x, mouse_y, false);
+				//event.verzerren(mouse_x, mouse_y, true);
+				
+				System.out.println("Mouse released on X: " + mouse_x + " Y:" + mouse_y);
 			}
 
 			@Override
