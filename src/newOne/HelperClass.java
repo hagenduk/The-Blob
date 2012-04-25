@@ -21,4 +21,16 @@ public class HelperClass {
 		}
 	}
 
+	public void printAllLocation(){
+		int i = 0;
+		for(Particle p : pm.particlesystem){
+			System.out.println("Particle: " + i + " Speed-x: " + p.getLocation(0) + " Speed-y: " + p.getLocation(1));
+		}
+	}
+	
+	public void printPartLocation(Particle p){
+		int i = 0;
+		System.out.println("Particle: " + i + " Speed-x: " + p.getLocation(0) + " Speed-y: " + p.getLocation(1));
+	}
+	
 }
