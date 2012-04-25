@@ -70,6 +70,9 @@ public class TestParticleGUI extends JWindow {
 				System.out.println("Mouse pressed on X: " + mouse_x + " Y:" + mouse_y);
 				
 				event.move(mouse_x, mouse_y, false);
+				
+				//TODO state var check whether you klicked on rand or in the middle!
+				//event.verzerren(mouse_x, mouse_y, false);
 			}
 
 			@Override
@@ -81,6 +84,11 @@ public class TestParticleGUI extends JWindow {
 				
 				event.move(mouse_x, mouse_y, false);
 				event.move(mouse_x, mouse_y, true);
+				
+				
+				//TODO: state var!!
+				//event.verzerren(mouse_x, mouse_y, false);
+				//event.verzerren(mouse_x, mouse_y, true);
 				
 				System.out.println("Mouse released on X: " + mouse_x + " Y:" + mouse_y);
 			}

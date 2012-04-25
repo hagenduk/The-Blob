@@ -117,7 +117,7 @@ public class Events{
 		
 		//Wenn schon ein Partikel gefunden bewegen		
 		if(zustand==1){		
-			gelocked.setLocation(mouse_x, mouse_y);
+			gelocked.setLocation(mouse_x-100, mouse_y-100);
 			System.out.println("Partikel bewegt!");			
 			System.out.println(gelocked.getLocation(0));
 			System.out.println(gelocked.getLocation(1));
@@ -155,7 +155,7 @@ public class Events{
 		if(zustand==1){
 			int xmove = mouse_x - xstart;   
 			int ymove = mouse_y - ystart;   
-
+			
 			xstart=mouse_x;
 			ystart=mouse_y;
 			
