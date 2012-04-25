@@ -119,8 +119,8 @@ public class Events{
 		if(zustand==1){		
 			gelocked.setLocation(mouse_x, mouse_y);
 			System.out.println("Partikel bewegt!");			
-			System.out.println(particle.getLocation(0));
-			System.out.println(particle.getLocation(1));
+			System.out.println(gelocked.getLocation(0));
+			System.out.println(gelocked.getLocation(1));
 //			gui.repaint();
 			
 		}
@@ -162,8 +162,8 @@ public class Events{
 			for (Particle p : pm.particlesystem) {
 			p.setLocation(p.getLocation(0)+xmove, p.getLocation(1)+ymove);
 			System.out.println("Partikelsystem bewegt!");			
-			System.out.println(particle.getLocation(0));
-			System.out.println(particle.getLocation(1));
+			System.out.println(p.getLocation(0));
+			System.out.println(p.getLocation(1));
 
 			}
 //			gui.repaint();
@@ -176,8 +176,7 @@ public class Events{
 			xstart=0;
 			ystart=0;
 			zustand=0;
-		}
-		
+		}	
 	}
 	
 
