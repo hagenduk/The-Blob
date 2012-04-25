@@ -23,11 +23,11 @@ public class Events{
 	private Particle particle;
 	private TestParticleGUI gui;
 	
-	//für verzerren
+	//fï¿½r verzerren
 	private int zustand=0;
 	private Particle gelocked;
 	
-	//für move
+	//fï¿½r move
 	private int xstart;
 	private int ystart;
 	
@@ -67,7 +67,7 @@ public class Events{
 		
 		for (Particle p : pm.particlesystem) {
 			distance = p.getDistance(mouse_x, mouse_y);
-			if(distance <= orad+200){
+			if(distance <= orad+200){//Ã„ndern!
 				particle = p;
 				break;
 			}
@@ -125,7 +125,7 @@ public class Events{
 			
 		}
 		
-		//Wenn ein Partikel gefunden wurde und ende übergeben wird freigeben
+		//Wenn ein Partikel gefunden wurde und ende ï¿½bergeben wird freigeben
 		if(zustand==1 && ende){
 			System.out.println("Partikel freigegeben!");			
 			gelocked=null;
@@ -141,7 +141,7 @@ public class Events{
 		//(2)alle partikel um differenz zu start bewegen
 		//(3)start = null
 
-		//erster durchlauf:  start setzen und zustand ändern
+		//erster durchlauf:  start setzen und zustand ï¿½ndern
 				if(zustand==0){
 					xstart=mouse_x;
 					ystart=mouse_y;
@@ -170,7 +170,7 @@ public class Events{
 			
 		}
 		
-		//Wenn start gesetzt wurde und ende übergeben wird freigeben
+		//Wenn start gesetzt wurde und ende ï¿½bergeben wird freigeben
 		if(zustand==1 && ende){
 			System.out.println("Move ende!");			
 			xstart=0;
