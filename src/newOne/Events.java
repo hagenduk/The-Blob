@@ -4,6 +4,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.event.*;
+import java.util.Random;
 
 
 /*
@@ -59,11 +60,17 @@ public class Events{
 			//TODO homoeo aktion
 		}
 	}
-	
+	/**
+	 * Generates two random numbers as speed for every particle.
+	 * @author eifinger
+	 * @param mouse_x
+	 * @param mouse_y
+	 */
 	public void poke(int mouse_x, int mouse_y) {
 		// TODO Auto-generated method stub
 		//(1)partikel ansprechen mit abgefragten koordinaten
 		//(2)diesen partikel aendern
+		/*
 		int distance = 0;
 		
 		for (Particle p : pm.particlesystem) {
@@ -82,13 +89,25 @@ public class Events{
 		
 		System.out.println(particle.getSpeed(0));
 		System.out.println(particle.getSpeed(1));
-		
+		*/
 		
 //		for(int i = 0; i < 100; i++){
 //			TestController.wait(300);
 //			gui.repaint();
 //		}
-		
+		float x_speed;
+		float y_speed;
+		Random rnd = new Random();
+		for (Particle p : pm.particlesystem) {
+			x_speed = rnd.nextInt(40)-20;
+			y_speed = rnd.nextInt(40)-20;
+			System.out.println("Poke erkannt!");
+			System.out.println(p.getSpeed(0));
+			System.out.println(p.getSpeed(1));
+			p.setSpeed(x_speed, y_speed);
+			System.out.println(p.getSpeed(0));
+			System.out.println(p.getSpeed(1));
+		}
 	}
 	
 	
