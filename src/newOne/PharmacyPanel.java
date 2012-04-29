@@ -48,12 +48,10 @@ public class PharmacyPanel extends JFrame {
 	
 	public PharmacyPanel(PMgnt pm) {
 		this.pPanel = this;
-
-		setVisible(true);
+		setUndecorated(true);
 		setResizable(true);		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(210, 100, 180, 100);
-		
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

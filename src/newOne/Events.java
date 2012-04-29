@@ -35,6 +35,7 @@ public class Events{
 		this.gui = testParticleGUI;
 		this.pm = pm;
 		panel = new PharmacyPanel(pm);
+		panel.setVisible(true);
 		orad = pm.particlesystem[0].OUTER_RAD;
 		
 	}
