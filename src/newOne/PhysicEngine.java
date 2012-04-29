@@ -12,7 +12,7 @@ public class PhysicEngine {
 	 * Is used to slow the particles down. 
 	 * The smaller Absorb the more the Particles will be slowed down
 	 */
-	private final float ABSORB=0.5f;
+	private final float ABSORB=0.7f;
 	/**
 	 * Used in physic equations, represents the gravitational constant of every object
 	 */
@@ -26,20 +26,32 @@ public class PhysicEngine {
 	 * Determines the minimum velocity for a particle,
 	 * if a Particle has a velocity smaller than this value it will be set to zero
 	 */
-	private final float QUANTUM=2.0f;
+	private final float QUANTUM=1.0f;
 	/**
 	 * Used in physic equations, the higher constant the faster the particle
 	 */
-	private final float CONSTANT=3000.0f;
+	private final float CONSTANT=2000.0f;
+	
+	/**
+	 * 
+	 */
+	private boolean equilibrium;
+	
 	private Particle[] pm;
 	private int max_x;
 	private int max_y;
+	
+	public boolean isEquilibrium() {
+		return equilibrium;
+	}
 	
 	PhysicEngine(Particle[] pm,int x, int y){
 		this.pm=pm;
 		this.max_x=x;
 		this.max_y=y;
+		this.equilibrium=false;
 	}
+	
 	/**
 	 * Creates a 2 dimensional Matrix which represents how the particles push/pull each other
 	 * It stores acceleration vectors (x,y)
@@ -59,7 +71,8 @@ public class PhysicEngine {
 		while(p<pm.length){
 			int i=0;//Particle for comparison
 			int r[]; //Distance/Radius
-			new_vector = new float[2];//acceleration vector
+			new_vector[0]=0;
+			new_vector[1]=0;
 			while(i<pm.length){
 				if (i==p){//Don't do anything if compared with itself, array is initialised with zero, should be fine
 					i++;
@@ -72,14 +85,17 @@ public class PhysicEngine {
 						tmp_vector=get_Repulsion(r);
 						new_vector[0]+=tmp_vector[0];
 						new_vector[1]+=tmp_vector[1];
+						
 //						System.out.println("Gravitation");
 						tmp_vector=get_Gravitation(r);
 						new_vector[0]+=tmp_vector[0];
 						new_vector[1]+=tmp_vector[1];
+						
 						i++;
 					}}
 				}
-			matrix[p]=new_vector;
+			matrix[p][0]=new_vector[0];
+			matrix[p][1]=new_vector[1];
 			p++;
 			}
 			
@@ -93,9 +109,16 @@ public class PhysicEngine {
 	 * @param a
 	 */
 	private void systemIteration(float[][] matrix, int length) {
+		/**
+		 * Counts up if Quantumcheck was true, used to check whether there is any movement or
+		 * an equilibrium is reached
+		 */
+		int standcount=0;
+		
 		int p=0;
 		while(p<length){
 		//Max velocity
+			
 		int orad=pm[0].OUTER_RAD;
 		if(matrix[p][0]>orad){matrix[p][0]=orad;}
 		if(matrix[p][0]<-orad){matrix[p][0]=-orad;}
@@ -113,8 +136,16 @@ public class PhysicEngine {
 			int x=Math.round(pm[p].getSpeed(0));
 			int y=Math.round(pm[p].getSpeed(1));
 			pm[p].setLocation(pm[p].getLocation(0)+x,pm[p].getLocation(1)+y);
+		}else{
+			pm[p].setSpeed(0, 0);
+			standcount++;
 		}
 		p++;
+		}
+		if(standcount==length){
+			equilibrium=true;
+		}else{
+			equilibrium=false;
 		}
 	}
 
@@ -159,7 +190,7 @@ public class PhysicEngine {
 		float dist = (r[2]-orad)*(r[2]-orad)*(r[2]-orad)*(r[2]-orad);
 		float tmp = r[0]/Math.abs(r[2]);
 		a[0]=GRAVITY*(CONSTANT/dist)*tmp;
-		tmp = (r[1]*r[1]);
+		tmp = (r[1]/Math.abs(r[2]));
 		a[1]=GRAVITY*(CONSTANT/dist)*tmp;
 		return a;
 	}
@@ -190,7 +221,7 @@ public class PhysicEngine {
 		 //Alternative quantumCheck
 		 int v=(int) Math.sqrt(p.getSpeed(0)*p.getSpeed(0)+p.getSpeed(1)*p.getSpeed(1));
 		 if(v<QUANTUM){
-		 	p.setSpeed(0, 0);
+		 	//System.out.println("QUANTUM");
 		 	return true;
 		 }else{
 		 	return false;

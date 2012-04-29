@@ -12,7 +12,7 @@ public class PhysicEngine {
 	 * Is used to slow the particles down. 
 	 * The smaller Absorb the more the Particles will be slowed down
 	 */
-	private final float ABSORB=0.8f;
+	private final float ABSORB=0.7f;
 	/**
 	 * Used in physic equations, represents the gravitational constant of every object
 	 */
@@ -26,7 +26,7 @@ public class PhysicEngine {
 	 * Determines the minimum velocity for a particle,
 	 * if a Particle has a velocity smaller than this value it will be set to zero
 	 */
-	private final float QUANTUM=2.0f;
+	private final float QUANTUM=1.0f;
 	/**
 	 * Used in physic equations, the higher constant the faster the particle
 	 */
@@ -94,7 +94,8 @@ public class PhysicEngine {
 						i++;
 					}}
 				}
-			matrix[p]=new_vector;
+			matrix[p][0]=new_vector[0];
+			matrix[p][1]=new_vector[1];
 			p++;
 			}
 			
@@ -185,8 +186,8 @@ public class PhysicEngine {
 	 */
 	private float[] get_Repulsion(int r[]){
 		float[] a = new float[2];
-		int orad=pm[0].OUTER_RAD/20*20;
-		float dist = (r[2]-orad)*(r[2]-orad);
+		int orad=pm[0].OUTER_RAD/4*3;
+		float dist = (r[2]-orad)*(r[2]-orad)*(r[2]-orad)*(r[2]-orad);
 		float tmp = r[0]/Math.abs(r[2]);
 		a[0]=GRAVITY*(CONSTANT/dist)*tmp;
 		tmp = (r[1]/Math.abs(r[2]));
