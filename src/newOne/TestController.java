@@ -17,17 +17,21 @@ package newOne;
 	    public static void main(String str[]) {
 	    	PMgnt pm = new PMgnt(PARTICLES,XAREA_PART_MGNT,YAREA_PART_MGNT,PARTICLE_RADIUS/2);
 			TestParticleGUI t1 = new TestParticleGUI(pm,PARTICLE_RADIUS, XAREA,YAREA);
-			
+			HelperClass hc = new HelperClass(pm);
 			t1.setVisible(true);
 			PhysicEngine pe = new PhysicEngine(pm.particlesystem,XAREA_PART_LOC,YAREA_PART_LOC);
 			
 			int i=0;
-			
-			while(i < 1000){
-				wait(REFRESH_TIME);	// waits for 300 ms
-					pe.run();
-					i++;
-					t1.repaint();
+			while(true){
+				do{
+					wait(REFRESH_TIME);	// waits for 300 ms
+						pe.run();
+						i++;
+						t1.repaint();
+						System.out.println("Equi: " + pe.isEquilibrium());
+						hc.printAllSpeed();
+				}while(!pe.isEquilibrium());
+				pe.run();
 			}
 	    }
 	    

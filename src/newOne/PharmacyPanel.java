@@ -43,10 +43,9 @@ public class PharmacyPanel extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @param pm - particle management obj. containing particlesystem array
 	 */
 	
-	public PharmacyPanel(PMgnt pm) {
+	public PharmacyPanel() {
 		this.pPanel = this;
 		setUndecorated(true);
 		setResizable(true);		
