@@ -1,27 +1,26 @@
 package newOne;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-
-import newOne.PharmacyPanel;
-
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-public class PharmacyPanel extends JFrame {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 	/**
-	 * 
+	 * PharmacyPanel.class is responsible for creating a user interaction panel
+	 * which triggers by user interaction the homoe / chemie functions 
+	 * of the Events.class.
+	 * @author TD, CF
+	 *
 	 */
+public class PharmacyPanel extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
@@ -44,7 +43,7 @@ public class PharmacyPanel extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @param pm 
+	 * @param pm - particle management obj. containing particlesystem array
 	 */
 	
 	public PharmacyPanel(PMgnt pm) {
