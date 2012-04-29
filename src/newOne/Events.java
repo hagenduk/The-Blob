@@ -19,7 +19,6 @@ public class Events{
 	private int area_y = 200;
 	private int rad_distance = 10;
 	private int particleCounter = 200;
-	private PharmacyPanel panel;
 	private int orad = 0;
 	private Particle particle;
 	private TestParticleGUI gui;
@@ -35,20 +34,14 @@ public class Events{
 	public Events(PMgnt pm, TestParticleGUI testParticleGUI) {
 		this.gui = testParticleGUI;
 		this.pm = pm;
-		panel = new PharmacyPanel(pm);
-		panel.setVisible(true);
 		orad = pm.particlesystem[0].OUTER_RAD;
 		
 	}
 
 	//Events to forward to PMgmt and PE
-	
-	public void openPharmacyPanel(){
-		panel.setVisible(true);
-	}
 
-	public void fuettern(){
-		if(panel.getState()==1){
+	public void fuettern(int state){
+		if(state==1){
 			//TODO chemie aktion
 			//1. Rahmen auf ganzen Bildschirm ausweiten
 			//2. Random Kraft auf alle Partikel
@@ -56,7 +49,7 @@ public class Events{
 			//4. 
 			
 		}
-		if(panel.getState()==2){
+		if(state==2){
 			//TODO homoeo aktion
 		}
 	}
