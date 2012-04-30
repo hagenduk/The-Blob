@@ -29,7 +29,8 @@ public class TestParticleGUI extends JWindow {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static BufferedImage texture;
-	private static BufferedImage texture2; 
+	private static BufferedImage texture2;
+	private static BufferedImage texture3;
 	private PMgnt pm;
 	private int radius;
 	private Events event;
@@ -48,6 +49,7 @@ public class TestParticleGUI extends JWindow {
 		if(sauer==20)
 			try {
 				texture2 = ImageIO.read( new File( "images/Auge4.png" ) );
+				texture3 = ImageIO.read( new File( "images/Mund3.png" ) );
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -55,6 +57,7 @@ public class TestParticleGUI extends JWindow {
 		if(sauer==30)
 			try {
 				texture2 = ImageIO.read( new File( "images/Auge2.png" ) );
+				texture3 = ImageIO.read( new File( "images/Mund2.png" ) );
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -62,6 +65,7 @@ public class TestParticleGUI extends JWindow {
 		if(sauer==40)
 			try {
 				texture2 = ImageIO.read( new File( "images/Auge1.png" ) );
+				texture3 = ImageIO.read( new File( "images/Mund1.png" ) );
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -69,6 +73,7 @@ public class TestParticleGUI extends JWindow {
 		if(sauer==50)
 			try {
 				texture2 = ImageIO.read( new File( "images/Auge5.png" ) );
+				texture3 = ImageIO.read( new File( "images/Mund5.png" ) );
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -76,6 +81,7 @@ public class TestParticleGUI extends JWindow {
 		if(sauer==60)
 			try {
 				texture2 = ImageIO.read( new File( "images/Auge3.png" ) );
+				texture3 = ImageIO.read( new File( "images/Mund5.png" ) );
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -83,6 +89,7 @@ public class TestParticleGUI extends JWindow {
 		if(sauer==70)
 			try {
 				texture2 = ImageIO.read( new File( "images/Auge8.png" ) );
+				texture3 = ImageIO.read( new File( "images/Mund5.png" ) );
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -90,6 +97,7 @@ public class TestParticleGUI extends JWindow {
 		if(sauer==80)
 			try {
 				texture2 = ImageIO.read( new File( "images/Auge7.png" ) );
+				texture3 = ImageIO.read( new File( "images/Mund4.png" ) );
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -198,13 +206,10 @@ public class TestParticleGUI extends JWindow {
 		this.pm = pm;
 		this.radius = radius;
 		try {
-			texture = ImageIO.read( new File( "images/texture01.png" ) );
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
 			texture2 = ImageIO.read( new File( "images/Auge6.png" ) );
+			texture = ImageIO.read( new File( "images/texture01.png" ) );
+			texture3 = ImageIO.read( new File( "images/Mund3.png" ) );
+			
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -237,8 +242,11 @@ public class TestParticleGUI extends JWindow {
 		for (Particle p : pm.particlesystem) {
 			if(p.kind==0)
 			g.drawImage(texture,p.getLocation(0), p.getLocation(1),this);
-			else{
+			else if(p.kind==1){
 				g.drawImage(texture2,p.getLocation(0), p.getLocation(1),this);	
+			}
+			else{
+				g.drawImage(texture3,p.getLocation(0), p.getLocation(1),this);	
 			}
 		}
 	}
