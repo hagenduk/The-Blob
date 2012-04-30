@@ -162,10 +162,11 @@ public class TestParticleGUI extends JWindow {
 						panel = new PharmacyPanel();
 						panel.setVisible(true);
 					}
+					else{panel.setVisible(true);
+					}
 				}
-				else{
-					
-					
+				else{					if(!(panel instanceof PharmacyPanel)){
+					panel = new PharmacyPanel();}					
 					int mouse_x,mouse_y;
 					mouse_x = e.getX();
 					mouse_y = e.getY();
