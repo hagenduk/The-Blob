@@ -39,6 +39,12 @@ public class TestParticleGUI extends JWindow {
 	public int sauer=0;
 	public int gut=0;
 	
+	public void size(int x, int y){
+		setSize(x,y);
+		centerOnScreen(this);
+			
+	}
+	
 	public void sauer(){
 		if(sauer==10)
 		try {
@@ -166,20 +172,25 @@ public class TestParticleGUI extends JWindow {
 					if(panel.state==0){
 					System.out.println("Poke erkannt!");
 					event.poke(mouse_x, mouse_y);
-					if(gut!=2)sauer=sauer+1;
+					sauer=sauer+1;
 					sauer();
 					//used for Hammer(optional!) and poke
 					}
 					else {
-						event.fuettern(panel.state, mouse_x, mouse_y);
 						if(panel.state==2 && gut<2){
 							gut++;
 							System.out.println("gut");
 							sauer=0;
 						}
-						else{if(gut>(-10))gut--;System.out.println("boese"); sauer=50;}						
+						else{
+							if(gut>(-10))gut--;
+							System.out.println("boese"); 
+							sauer=50;
+							size(1200,600);
+							}						
 						sauer();
 						panel.state=0;
+						event.fuettern(panel.state, mouse_x, mouse_y);
 					}
 				}
 			}
@@ -189,7 +200,7 @@ public class TestParticleGUI extends JWindow {
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				System.out.println("Entered");
-				if(sauer>0 && gut>-5)sauer=sauer-1;
+				sauer=sauer-1;
 				sauer();
 				
 			}
@@ -198,7 +209,7 @@ public class TestParticleGUI extends JWindow {
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				System.out.println("left");
-				if(sauer>0 && gut>-5)sauer=sauer-1;
+				sauer=sauer-1;
 				sauer();
 			}
 
@@ -236,7 +247,7 @@ public class TestParticleGUI extends JWindow {
 						//TODO: state var!!
 						event.verzerren(mouse_x, mouse_y, false);
 						event.verzerren(mouse_x, mouse_y, true);
-						if(gut!=2)sauer=sauer+1;
+						sauer=sauer+1;
 						sauer();
 					}
 				}
@@ -274,11 +285,13 @@ public class TestParticleGUI extends JWindow {
 
 		setSize(xarea,yarea);
 		centerOnScreen(this);
+		
 		// capture background before we add components;
 		// we need JWindows's size here and component's location must also have
 		// been done!
 		BackgroundPanel backgroundPanel = new BackgroundPanel(this);
 		JButton closeButton = new JButton("Close");
+		
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TestParticleGUI.this.setVisible(false);

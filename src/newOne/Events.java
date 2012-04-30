@@ -50,13 +50,19 @@ public class Events{
 			
 			float x_speed;
 			float y_speed;
+			int xpos;
+			int ypos;
 			Random rnd = new Random();
 			for (Particle p : pm.particlesystem) {
-				x_speed = rnd.nextInt(80)-20;
-				y_speed = rnd.nextInt(80)-20;
+				x_speed = rnd.nextInt(100);
+				y_speed = rnd.nextInt(100);
+				xpos = rnd.nextInt(1200);
+				ypos = rnd.nextInt(800);
+				
 				System.out.println("chemie erkannt!");
 				//System.out.println(p.getSpeed(0));
 				//System.out.println(p.getSpeed(1));
+				p.setLocation(xpos, ypos);
 				p.setSpeed(x_speed, y_speed);
 				//System.out.println(p.getSpeed(0));
 				//System.out.println(p.getSpeed(1));
