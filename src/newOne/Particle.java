@@ -3,8 +3,10 @@ package newOne;
 public class Particle {
 	public final int INNER_RAD = 5;//Lieber beim erstellen im PMgnt festlegen?
 	public final int OUTER_RAD = 20;//Lieber beim erstellen im PMgnt festlegen?
+	public int kind=0;
 	private int[] location = new int[2];
 	private float[] speed = {0.0f, 0.0f};
+	
 
 	Particle(int pos_x, int pos_y) {
 		this.location[0] = pos_x;

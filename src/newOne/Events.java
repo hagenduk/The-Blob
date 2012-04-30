@@ -53,6 +53,40 @@ public class Events{
 			//TODO homoeo aktion
 		}
 	}
+	
+	
+	public boolean incenter(int x, int y){
+		int xmin=0;
+		int xmax=0;
+		int ymin=0;
+		int ymax=0;
+		int centerx=0;
+		int centery=0;
+		int i=0;
+		
+		for (Particle p : pm.particlesystem) {
+			if(i==0){xmin = p.getLocation(0); xmax = p.getLocation(0); ymin = p.getLocation(1); ymax = p.getLocation(1); i=1;}
+			if(p.getLocation(0) < xmin)	xmin = p.getLocation(0);
+			if(p.getLocation(0) > xmax)	xmax = p.getLocation(0);
+			if(p.getLocation(1) < ymin)	ymin = p.getLocation(1);
+			if(p.getLocation(1) > ymax)	ymax = p.getLocation(1);
+			}
+		
+		centerx=(xmax-xmin)/2;
+		centery=(ymax-ymin)/2;
+		System.out.println("xmitte= " + centerx + "ymitte= " + centery);
+		System.out.println("xklick= " + x + "yklick= " + y);
+		System.out.println(xmax+ ", " + xmin+ ", " + ymin+ ", " + ymax);
+		if(x>(centerx+250) || x<(centerx-250)){ System.out.println("false1"); return false;}
+		else if(y>(centery+250) || y<(centery-250)){ 	
+			System.out.println("false2"); 
+			return false;
+		}
+		else{ System.out.println("true"); return true;}	
+	}
+	
+	
+	
 	/**
 	 * Generates two random numbers as speed for every particle.
 	 * @author eifinger

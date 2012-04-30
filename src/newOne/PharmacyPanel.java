@@ -31,7 +31,7 @@ public class PharmacyPanel extends JFrame {
 	private JButton btnHomoe;
 
 	//TODO test
-	private int state=0;
+	protected int state=0;
 	
 	public int getState() {
 		return state;

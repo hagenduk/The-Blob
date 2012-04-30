@@ -28,12 +28,73 @@ public class TestParticleGUI extends JWindow {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static BufferedImage texture; 
+	private static BufferedImage texture;
+	private static BufferedImage texture2; 
 	private PMgnt pm;
 	private int radius;
 	private Events event;
 	private PharmacyPanel panel;
+	private int state=0;
+	public int sauer=0;
 	
+	public void sauer(){
+		if(sauer==10)
+		try {
+			texture2 = ImageIO.read( new File( "images/Auge6.png" ) );
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(sauer==20)
+			try {
+				texture2 = ImageIO.read( new File( "images/Auge4.png" ) );
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if(sauer==30)
+			try {
+				texture2 = ImageIO.read( new File( "images/Auge2.png" ) );
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if(sauer==40)
+			try {
+				texture2 = ImageIO.read( new File( "images/Auge1.png" ) );
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if(sauer==50)
+			try {
+				texture2 = ImageIO.read( new File( "images/Auge5.png" ) );
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if(sauer==60)
+			try {
+				texture2 = ImageIO.read( new File( "images/Auge3.png" ) );
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if(sauer==70)
+			try {
+				texture2 = ImageIO.read( new File( "images/Auge8.png" ) );
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if(sauer==80)
+			try {
+				texture2 = ImageIO.read( new File( "images/Auge7.png" ) );
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	}
 
 	public TestParticleGUI(PMgnt pm, int radius, int xarea, int yarea) {
 		 event = new Events(pm,this);
@@ -54,6 +115,8 @@ public class TestParticleGUI extends JWindow {
 				
 					System.out.println("Poke erkannt!");
 					event.poke(mouse_x, mouse_y);
+					sauer=sauer+1;
+					sauer();
 					//used for Hammer(optional!) and poke
 				}
 			}
@@ -62,13 +125,18 @@ public class TestParticleGUI extends JWindow {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				System.out.println("Entered");
+				if(sauer>0)sauer=sauer-1;
+				sauer();
 				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				System.out.println("left");
+				if(sauer>0)sauer=sauer-1;
+				sauer();
 			}
 
 			@Override
@@ -79,10 +147,15 @@ public class TestParticleGUI extends JWindow {
 				mouse_y = e.getY();
 //				System.out.println("Mouse pressed on X: " + mouse_x + " Y:" + mouse_y);
 				
-				event.move(mouse_x, mouse_y, false);
-				
-				//TODO state var check whether you klicked on rand or in the middle!
-				//event.verzerren(mouse_x, mouse_y, false);
+				if(event.incenter(mouse_x,mouse_y)){
+					event.move(mouse_x, mouse_y, false);
+					state=1;
+				}
+				else{				
+				//TODO state var check whether you klicked on rand or in the middle! DONE
+					event.verzerren(mouse_x, mouse_y, false);
+					state=2;
+				}
 			}
 
 			@Override
@@ -91,14 +164,21 @@ public class TestParticleGUI extends JWindow {
 				int mouse_x,mouse_y;
 				mouse_x = e.getX();
 				mouse_y = e.getY();
-				
+				if(state==1){
 				event.move(mouse_x, mouse_y, false);
 				event.move(mouse_x, mouse_y, true);
+				}
+				else{
+					if(state==2){
+						//TODO: state var!!
+						event.verzerren(mouse_x, mouse_y, false);
+						event.verzerren(mouse_x, mouse_y, true);
+						sauer=sauer+1;
+						sauer();
+					}
+				}
 				
-				
-				//TODO: state var!!
-				//event.verzerren(mouse_x, mouse_y, false);
-				//event.verzerren(mouse_x, mouse_y, true);
+
 				
 //				System.out.println("Mouse released on X: " + mouse_x + " Y:" + mouse_y);
 			}
@@ -119,6 +199,12 @@ public class TestParticleGUI extends JWindow {
 		this.radius = radius;
 		try {
 			texture = ImageIO.read( new File( "images/texture01.png" ) );
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			texture2 = ImageIO.read( new File( "images/Auge6.png" ) );
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -149,7 +235,11 @@ public class TestParticleGUI extends JWindow {
 		super.paint(g);
 		g.setColor(Color.green);
 		for (Particle p : pm.particlesystem) {
+			if(p.kind==0)
 			g.drawImage(texture,p.getLocation(0), p.getLocation(1),this);
+			else{
+				g.drawImage(texture2,p.getLocation(0), p.getLocation(1),this);	
+			}
 		}
 	}
 

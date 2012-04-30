@@ -28,8 +28,8 @@ package newOne;
 						pe.run();
 						i++;
 						t1.repaint();
-						System.out.println("Equi: " + pe.isEquilibrium());
-						hc.printAllSpeed();
+						//System.out.println("Equi: " + pe.isEquilibrium());
+						//hc.printAllSpeed();
 				}while(!pe.isEquilibrium());
 				pe.run();
 			}

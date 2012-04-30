@@ -22,6 +22,7 @@ public class PMgnt {
 
 	private void createParticle() {
 		boolean done = false;
+		boolean eyes = false;
 		pos_x = (int) ((Math.random()+1)*area_x);
 		pos_y = (int) ((Math.random()+1)*area_y);
 		particlesystem[0] = new Particle(pos_x,pos_y);
@@ -32,6 +33,7 @@ public class PMgnt {
 				pos_y = (int) ((Math.random()+1)*area_y);
 				 if(isNeighbour()){
 						particlesystem[i] = new Particle(pos_x,pos_y);
+						if(!eyes && i==system_size-1)particlesystem[i].kind=1;
 						particleCounter++;
 						done = true;
 				 }
