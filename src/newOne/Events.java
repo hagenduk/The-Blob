@@ -40,13 +40,28 @@ public class Events{
 
 	//Events to forward to PMgmt and PE
 
-	public void fuettern(int state){
+	public void fuettern(int state, int x, int y){
 		if(state==1){
 			//TODO chemie aktion
 			//1. Rahmen auf ganzen Bildschirm ausweiten
 			//2. Random Kraft auf alle Partikel
 			//3. Theoretisch sollten alle einen kreis bilden am ende
 			//4. 
+			
+			float x_speed;
+			float y_speed;
+			Random rnd = new Random();
+			for (Particle p : pm.particlesystem) {
+				x_speed = rnd.nextInt(80)-20;
+				y_speed = rnd.nextInt(80)-20;
+				System.out.println("chemie erkannt!");
+				//System.out.println(p.getSpeed(0));
+				//System.out.println(p.getSpeed(1));
+				p.setSpeed(x_speed, y_speed);
+				//System.out.println(p.getSpeed(0));
+				//System.out.println(p.getSpeed(1));
+			}
+			
 			
 		}
 		if(state==2){

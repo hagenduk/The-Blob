@@ -90,6 +90,7 @@ public class PharmacyPanel extends JFrame {
 		btnHomoe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Homoe");
+				setState(2);
 			}
 		});
 		
@@ -100,6 +101,7 @@ public class PharmacyPanel extends JFrame {
 		btnChemie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Chemie");
+				setState(1);
 			}
 		});
 		setContentPane(contentPane);
