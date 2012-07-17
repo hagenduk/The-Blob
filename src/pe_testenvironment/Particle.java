@@ -4,7 +4,7 @@ public class Particle {
 	public final int INNER_RAD = 5;//Lieber beim erstellen im PMgnt festlegen?
 	public final int OUTER_RAD = 20;//Lieber beim erstellen im PMgnt festlegen?
 	private int[] location = new int[2];
-	private float[] speed = {0.0f, 0.0f};
+	private int[] speed = {0, 0};
 
 	Particle(int pos_x, int pos_y) {
 		this.location[0] = pos_x;
@@ -20,20 +20,20 @@ public class Particle {
 		return location[direction];
 	}
 
-	public float getSpeed(int direction) {
+	public int getSpeed(int direction) {
 		return speed[direction];
 	}
 
-	public void setSpeed(float x_speed, float y_speed) {
+	public void setSpeed(int x_speed, int y_speed) {
 		
 		if(x_speed >= OUTER_RAD)
-			x_speed = OUTER_RAD;
+			x_speed = OUTER_RAD/2;
 		if(x_speed <= (-OUTER_RAD))
-			x_speed = -OUTER_RAD;
+			x_speed = -OUTER_RAD/2;
 		if(y_speed >= OUTER_RAD)
-			y_speed = OUTER_RAD;
+			y_speed = OUTER_RAD/2;
 		if(y_speed <= (-OUTER_RAD))
-			y_speed = -OUTER_RAD;
+			y_speed = -OUTER_RAD/2;
 		
 		this.speed[0] = x_speed;
 		this.speed[1] = y_speed;

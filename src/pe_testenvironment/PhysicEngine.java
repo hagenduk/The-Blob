@@ -10,13 +10,13 @@ public class PhysicEngine {
 	
 	/**
 	 * Is used to slow the particles down. 
-	 * The smaller Absorb the more the Particles will be slowed down
+	 * The higher Absorb the more the Particles will be slowed down
 	 */
-	private final float ABSORB=0.7f;
+	private final int ABSORB=2;
 	/**
 	 * Used in physic equations, represents the gravitational constant of every object
 	 */
-	private final float GRAVITY=3.0f;
+	private final int GRAVITY=3;
 	/**
 	 * Used in physic equations, like strength of a spring, 
 	 * the higher Elasticity, the faster the Particle will be accelerated
@@ -26,11 +26,11 @@ public class PhysicEngine {
 	 * Determines the minimum velocity for a particle,
 	 * if a Particle has a velocity smaller than this value it will be set to zero
 	 */
-	private final float QUANTUM=1.0f;
+	private final int QUANTUM=1;
 	/**
 	 * Used in physic equations, the higher constant the faster the particle
 	 */
-	private final float CONSTANT=2000.0f;
+	private final int CONSTANT=2000;
 	
 	/**
 	 * 
@@ -64,27 +64,31 @@ public class PhysicEngine {
 	 * collisionDetection checks if it would go past the borders, if so its velocity direction is negated.
 	 */
 	public void run(){
-		float[][] matrix = createMatrix(pm);//Create Matrix
-		float[] new_vector = new float[2];//new acceleration vector for a particle summarisation of tmp_vector
-		float[] tmp_vector = new float[2];//acceleration vector between 2 particles
+		int[][] matrix = createMatrix(pm);//Create Matrix
+		int[] new_vector = new int[2];//new acceleration vector for a particle summarisation of tmp_vector
+		int[] tmp_vector = new int[2];//acceleration vector between 2 particles
 		int p=0;//Current Particle
 		while(p<pm.length){
 			int i=0;//Particle for comparison
 			int r[]; //Distance/Radius
-			new_vector[0]=0;
+			new_vector = new int[2];
+/*			new_vector[0]=0;
 			new_vector[1]=0;
-			while(i<pm.length){
+*/			while(i<pm.length){
 				if (i==p){//Don't do anything if compared with itself, array is initialised with zero, should be fine
 					i++;
 				}else{
 					r=pm[p].getDistance(pm[i]);
-//						System.out.println("Repulsion");
-						if(r[2]==0){
+						if(r[2]==0){//TODO BUG!
 							i++;
 						}else{
-						tmp_vector=get_Repulsion(r);
-						new_vector[0]+=tmp_vector[0];
-						new_vector[1]+=tmp_vector[1];
+							//Hit
+						if(r[2]<=pm[0].OUTER_RAD) {
+							int kin[] = new int[2];
+							kin[0] = Math.abs(pm[p].getSpeed(0) + pm[i].getSpeed(0));
+							kin[1] = Math.abs(pm[p].getSpeed(1) + pm[i].getSpeed(1));
+							
+						}
 						
 //						System.out.println("Gravitation");
 						tmp_vector=get_Gravitation(r);
@@ -108,7 +112,7 @@ public class PhysicEngine {
 	 * @param particle
 	 * @param a
 	 */
-	private void systemIteration(float[][] matrix, int length) {
+	private void systemIteration(int[][] matrix, int length) {
 		/**
 		 * Counts up if Quantumcheck was true, used to check whether there is any movement or
 		 * an equilibrium is reached
@@ -126,14 +130,14 @@ public class PhysicEngine {
 		if(matrix[p][1]<-orad){matrix[p][1]=-orad;}
 		
 		//Set velocity
-		pm[p].setSpeed((pm[p].getSpeed(0)+matrix[p][0])*ABSORB, (pm[p].getSpeed(1)+matrix[p][1])*ABSORB);
+		pm[p].setSpeed(Math.round((pm[p].getSpeed(0)+matrix[p][0])/ABSORB), Math.round((pm[p].getSpeed(1)+matrix[p][1])/ABSORB));
 		//Quantum Check
 		if(!quantumCheck(pm[p])){
 			//Collision Detection
 			collisionDetection(max_x,max_y,pm[p]);
 			//while(innerRadDetection(pm, p));
 			//Set location
-			int x=Math.round(pm[p].getSpeed(0));
+			int x=pm[p].getSpeed(0);
 			int y=Math.round(pm[p].getSpeed(1));
 			pm[p].setLocation(pm[p].getLocation(0)+x,pm[p].getLocation(1)+y);
 		}else{
@@ -160,12 +164,12 @@ public class PhysicEngine {
 	 * @param r[] array containing distances in x,y direction
 	 * @return float representation in x and y directions of the acceleration between two particles
 	 */
-	private float[] get_Gravitation(int r[]){
-		float[] a = new float[2];
-		float dist = r[2]*r[2];
-		float tmp = r[0]/Math.abs(r[2]);
+	private int[] get_Gravitation(int r[]){
+		int[] a = new int[2];
+		int dist = r[2]*r[2];
+		int tmp = Math.round(r[0]/Math.abs(r[2]));
 		a[0]=-GRAVITY*(CONSTANT/(dist))*tmp;
-		tmp = r[1]/Math.abs(r[2]);
+		tmp = Math.round(r[1]/Math.abs(r[2]));
 		a[1]=-GRAVITY*(CONSTANT/(dist))*tmp;
 		return a;
 	}
@@ -184,16 +188,17 @@ public class PhysicEngine {
 	 * @param r[] array containing distances in x,y direction and overall distance
 	 * @return float representation of the acceleration between two particles
 	 */
-	private float[] get_Repulsion(int r[]){
-		float[] a = new float[2];
-		int orad=pm[0].OUTER_RAD/4*3;
-		float dist = (r[2]-orad)*(r[2]-orad)*(r[2]-orad)*(r[2]-orad);
-		float tmp = r[0]/Math.abs(r[2]);
+	private int[] get_Repulsion(int r[]){
+		int[] a = new int[2];
+		int orad = pm[0].OUTER_RAD/4*3;
+		int dist = (r[2]-orad)*(r[2]-orad)*(r[2]-orad)*(r[2]-orad);
+		int tmp = Math.round(r[0]/Math.abs(r[2]));
 		a[0]=GRAVITY*(CONSTANT/dist)*tmp;
-		tmp = (r[1]/Math.abs(r[2]));
+		tmp = Math.round(r[1]/Math.abs(r[2]));
 		a[1]=GRAVITY*(CONSTANT/dist)*tmp;
 		return a;
 	}
+
 	
 
 	/**
@@ -221,9 +226,10 @@ public class PhysicEngine {
 		 //Alternative quantumCheck
 		 int v=(int) Math.sqrt(p.getSpeed(0)*p.getSpeed(0)+p.getSpeed(1)*p.getSpeed(1));
 		 if(v<QUANTUM){
-		 	//System.out.println("QUANTUM");
+		 	System.out.println("TRUE Quantum v = " + Integer.toString(v));
 		 	return true;
 		 }else{
+			System.out.println("FALSE Quantum v = " + Integer.toString(v));
 		 	return false;
 		 }
 		 
@@ -247,8 +253,8 @@ public class PhysicEngine {
 		}
 	}
 	
-	private float[][] createMatrix(Particle[] pm){
-		float[][] Matrix = new float[pm.length][2];//2-dimensional Matrix storing acceleration vectors
+	private int[][] createMatrix(Particle[] pm){
+		int[][] Matrix = new int[pm.length][2];//2-dimensional Matrix storing acceleration vectors
 		return Matrix;
 	}
 	/**
