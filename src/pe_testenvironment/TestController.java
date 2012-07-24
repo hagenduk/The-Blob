@@ -4,13 +4,13 @@ package pe_testenvironment;
 
 		private static final int XAREA = 600;			// GUI size
 		private static final int YAREA = 600;			// GUI size
-		private static final int XAREA_PART_LOC = 200; 	// Sammelpunkt der Partikel
-		private static final int YAREA_PART_LOC = 200; 	// Sammelpunkt der Partikel 
+		private static final int XAREA_PART_LOC = 600; 	// Sammelpunkt der Partikel
+		private static final int YAREA_PART_LOC = 600; 	// Sammelpunkt der Partikel 
 		private static final int XAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel
 		private static final int YAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel 
 		
 		private static final int REFRESH_TIME = 300;	// Refresh rate
-		private static final int PARTICLES = 5;		// Amount of Particles
+		private static final int PARTICLES = 2;		// Amount of Particles
 		private static final int PARTICLE_RADIUS = 20;  // Particle radius
 		
 		
@@ -19,13 +19,14 @@ package pe_testenvironment;
 			TestParticleGUI t1 = new TestParticleGUI(pm,PARTICLE_RADIUS, XAREA,YAREA);
 			
 			t1.setVisible(true);
-			PhysicEngine pe = new PhysicEngine(pm.particlesystem,XAREA_PART_LOC,YAREA_PART_LOC);
+			PhysicEngine2 pe = new PhysicEngine2(pm.particlesystem);
 			
 			int i=0;
-			
+			//pe.stop();
 			while(i < 1000){
 				wait(REFRESH_TIME);	// waits for 300 ms
-					pe.run();
+					pe.step(0.05);
+					pe.modifyObjects();
 					i++;
 					t1.repaint();
 			}

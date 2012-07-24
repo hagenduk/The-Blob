@@ -66,7 +66,7 @@ public class Events{
 		int distance = 0;
 		int i=0;
 		for (Particle p : pm.particlesystem) {
-			distance = p.getDistance(mouse_x, mouse_y);
+			//distance = p.getDistance(mouse_x, mouse_y);
 			if(distance <= orad+200){//Ändern!
 				System.out.println(i);
 				particle = p;

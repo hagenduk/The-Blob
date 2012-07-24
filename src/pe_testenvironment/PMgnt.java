@@ -4,8 +4,8 @@ public class PMgnt {
 	
 	private int system_size = 0;
 	public Particle[] particlesystem; 
-	private int pos_x = 0;
-	private int pos_y = 0;
+	private double pos_x = 0;
+	private double pos_y = 0;
 	private int area_x = 0;
 	private int area_y = 0;
 	private int rad_distance = 0;
@@ -22,14 +22,14 @@ public class PMgnt {
 
 	private void createParticle() {
 		boolean done = false;
-		pos_x = (int) ((Math.random()+1)*area_x);
-		pos_y = (int) ((Math.random()+1)*area_y);
+		pos_x = (double) ((Math.random()+1)*area_x);
+		pos_y = (double) ((Math.random()+1)*area_y);
 		particlesystem[0] = new Particle(pos_x,pos_y);
 		particleCounter++;
 		for(int i = 1; i < system_size; i++){
 			while (!done) {
-				pos_x = (int) ((Math.random()+1)*area_x);
-				pos_y = (int) ((Math.random()+1)*area_y);
+				pos_x = (double) ((Math.random()+1)*area_x);
+				pos_y = (double) ((Math.random()+1)*area_y);
 				 if(isNeighbour()){
 						particlesystem[i] = new Particle(pos_x,pos_y);
 						particleCounter++;
@@ -42,9 +42,9 @@ public class PMgnt {
 
 	private boolean isNeighbour() {
 		boolean check = false;
-		int resultVector_y = 0;
-		int resultVector_x = 0;
-		int distance = 0;
+		double resultVector_y = 0;
+		double resultVector_x = 0;
+		double distance = 0;
 		while(!check){
 			for (int i = 0; i < particleCounter; i++) {
 				resultVector_x = pos_x - particlesystem[i].getLocation(0);
@@ -61,8 +61,8 @@ public class PMgnt {
 		return check;
 	}
 
-	public int calculateDistance(int resultVector_x, int resultVector_y) {
-		int distance = (int) Math.sqrt((resultVector_y*resultVector_x)+(resultVector_y*resultVector_y));
+	public double calculateDistance(double resultVector_x, double resultVector_y) {
+		double distance = (double) Math.sqrt((resultVector_y*resultVector_x)+(resultVector_y*resultVector_y));
 		return distance;
 	}
 
