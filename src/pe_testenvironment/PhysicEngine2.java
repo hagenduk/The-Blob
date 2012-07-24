@@ -69,9 +69,9 @@ public class PhysicEngine2 {
 				double sc = SPRINGCONSTANT;
 
 					for (int t = 0; t < pm.length; t++) {
-						if ((i/4 != 4*t)) {
-							double xx = x[4*t] - x[i/4];  // x distance between objects
-				            double yy = x[1 + 4*t] - x[1 + i/4];  // y distance betw objects
+						if ((i/4 != t)) {
+							double xx = x[4*t] - x[(i/4)*4];  // x distance between objects
+				            double yy = x[1 + 4*t] - x[1 + (i/4)*4];  // y distance betw objects
 				            double len = Math.sqrt(xx*xx + yy*yy);  // total distance betw objects
 							// Fx = (sc/m)*(len - R)*xx/len or
 							// Fy = (sc/m)*(len - R)*yy/len - g

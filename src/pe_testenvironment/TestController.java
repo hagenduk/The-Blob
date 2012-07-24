@@ -9,8 +9,8 @@ package pe_testenvironment;
 		private static final int XAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel
 		private static final int YAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel 
 		
-		private static final int REFRESH_TIME = 300;	// Refresh rate
-		private static final int PARTICLES = 2;		// Amount of Particles
+		private static final int REFRESH_TIME = 17;	// Refresh rate
+		private static final int PARTICLES = 5;		// Amount of Particles
 		private static final int PARTICLE_RADIUS = 20;  // Particle radius
 		
 		
