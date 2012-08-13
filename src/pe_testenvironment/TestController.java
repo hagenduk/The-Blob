@@ -10,7 +10,7 @@ package pe_testenvironment;
 		private static final int YAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel 
 		
 		private static final int REFRESH_TIME = 17;	// Refresh rate
-		private static final int PARTICLES = 5;		// Amount of Particles
+		private static final int PARTICLES = 10;		// Amount of Particles
 		private static final int PARTICLE_RADIUS = 20;  // Particle radius
 		
 		
@@ -21,13 +21,11 @@ package pe_testenvironment;
 			t1.setVisible(true);
 			PhysicEngine2 pe = new PhysicEngine2(pm.particlesystem);
 			
-			int i=0;
 			//pe.stop();
-			while(i < 1000){
+			while(true){
 				wait(REFRESH_TIME);	// waits for 300 ms
 					pe.step(0.05);
 					pe.modifyObjects();
-					i++;
 					t1.repaint();
 			}
 	    }

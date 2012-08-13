@@ -4,34 +4,29 @@ package newOne;
 
 		private static final int XAREA = 600;			// GUI size
 		private static final int YAREA = 600;			// GUI size
-		private static final int XAREA_PART_LOC = 200; 	// Sammelpunkt der Partikel
-		private static final int YAREA_PART_LOC = 200; 	// Sammelpunkt der Partikel 
+		private static final int XAREA_PART_LOC = 600; 	// Sammelpunkt der Partikel
+		private static final int YAREA_PART_LOC = 600; 	// Sammelpunkt der Partikel 
 		private static final int XAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel
 		private static final int YAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel 
 		
-		private static final int REFRESH_TIME = 300;	// Refresh rate
-		private static final int PARTICLES = 20;		// Amount of Particles
+		private static final int REFRESH_TIME = 17;	// Refresh rate
+		private static final int PARTICLES = 10;		// Amount of Particles
 		private static final int PARTICLE_RADIUS = 20;  // Particle radius
 		
 		
 	    public static void main(String str[]) {
 	    	PMgnt pm = new PMgnt(PARTICLES,XAREA_PART_MGNT,YAREA_PART_MGNT,PARTICLE_RADIUS/2);
 			TestParticleGUI t1 = new TestParticleGUI(pm,PARTICLE_RADIUS, XAREA,YAREA);
-			HelperClass hc = new HelperClass(pm);
-			t1.setVisible(true);
-			PhysicEngine pe = new PhysicEngine(pm.particlesystem,XAREA_PART_LOC,YAREA_PART_LOC);
 			
-			int i=0;
+			t1.setVisible(true);
+			PhysicEngine pe = new PhysicEngine(pm.particlesystem);
+			
+			//pe.stop();
 			while(true){
-				do{
-					wait(REFRESH_TIME);	// waits for 300 ms
-						pe.run();
-						i++;
-						t1.repaint();
-						//System.out.println("Equi: " + pe.isEquilibrium());
-						//hc.printAllSpeed();
-				}while(!pe.isEquilibrium());
-				pe.run();
+				wait(REFRESH_TIME);	// waits for 300 ms
+					pe.step(0.05);
+					pe.modifyObjects();
+					t1.repaint();
 			}
 	    }
 	    

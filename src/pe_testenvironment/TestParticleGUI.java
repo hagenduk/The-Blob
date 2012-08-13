@@ -118,7 +118,7 @@ public class TestParticleGUI extends JWindow {
 		super.paint(g);
 		g.setColor(Color.green);
 		for (Particle p : pm.particlesystem) {
-			g.fillOval((int) p.getLocation(0), (int) p.getLocation(1), 40, 40);
+			g.fillOval((int) p.getLocation(0), (int) p.getLocation(1), 200, 200);
 		}
 	}
 

@@ -1,14 +1,31 @@
 package pe_testenvironment;
 
 public class PhysicEngine2 {
-
+	
+	/*
+	 * vars is the presentation of location and speed of every particle in the matter of 
+	 * 0	1	2	3		4	...
+	 * Ux	Uy	Vx	Vy		U1x	...
+	 * 
+	 * It is used for computating inside the PhysicEngine Class
+	 * The method modifyObjects() applies the computed locations and speeds to the pm
+	 */
 	protected double[] vars;
+	
+	/*
+	 * The Particle Mngt to be worked with
+	 */
 	private Particle[] pm;
-	double SPRINGCONSTANT = 6;
-	double MASS = 0.5;
-	double LEN = 100;
-	double GRAVITY = 0;
-	double DAMPING = 0.1;
+	
+	/*
+	 * Physical Constants
+	 */
+	
+	private double SPRINGCONSTANT = 6;
+	private double MASS = 0.5;
+	private double LEN = 100;
+	private double GRAVITY = 0;
+	private double DAMPING = 0.1;
 	
 	/*
 	 * vars is the presentation of location and speed of every particle in the matter of 
@@ -73,8 +90,6 @@ public class PhysicEngine2 {
 							double xx = x[4*t] - x[(i/4)*4];  // x distance between objects
 				            double yy = x[1 + 4*t] - x[1 + (i/4)*4];  // y distance betw objects
 				            double len = Math.sqrt(xx*xx + yy*yy);  // total distance betw objects
-							// Fx = (sc/m)*(len - R)*xx/len or
-							// Fy = (sc/m)*(len - R)*yy/len - g
 							double f = (sc / MASS) * (len - LEN) / len;// Springforce
 							r += (j == 2) ? f * xx : -GRAVITY + f * yy; //apply to x or y Direction
 						}	
@@ -90,14 +105,13 @@ public class PhysicEngine2 {
 		double w = pm[0].OUTER_RAD / 2;
 		for (int i = 0; i < pm.length; i++) {
 			pm[i].setLocation((vars[4 * i] - w), (vars[1 + 4 * i] - w));
-			System.out.print(i+" X: ");
-			System.out.print((vars[4 * i] - w) + " ");
-			System.out.print(i+" Y: ");
-			System.out.print((vars[1 + 4 * i] - w) + "\n");
 		}
 	}
-	
+	/*
+	 * Sets Particles in a stable round position
+	 */
 	public void stop(){
+		//TODO Fix central point
 		double r = 1; // radius
 	    for (int i=0; i<pm.length; i++)
 	    {
@@ -105,6 +119,37 @@ public class PhysicEngine2 {
 	      vars[0 + i*4] = r*Math.cos(rnd*i*2*Math.PI/pm.length);
 	      vars[1 + i*4] = r*Math.sin(rnd*i*2*Math.PI/pm.length);
 	    }
+	    
+	}
+	public double getSPRINGCONSTANT() {
+		return SPRINGCONSTANT;
+	}
+	public void setSPRINGCONSTANT(double sPRINGCONSTANT) {
+		SPRINGCONSTANT = sPRINGCONSTANT;
+	}
+	public double getMASS() {
+		return MASS;
+	}
+	public void setMASS(double mASS) {
+		MASS = mASS;
+	}
+	public double getLEN() {
+		return LEN;
+	}
+	public void setLEN(double lEN) {
+		LEN = lEN;
+	}
+	public double getGRAVITY() {
+		return GRAVITY;
+	}
+	public void setGRAVITY(double gRAVITY) {
+		GRAVITY = gRAVITY;
+	}
+	public double getDAMPING() {
+		return DAMPING;
+	}
+	public void setDAMPING(double dAMPING) {
+		DAMPING = dAMPING;
 	}
 
 }

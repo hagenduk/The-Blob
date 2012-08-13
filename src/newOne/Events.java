@@ -13,8 +13,8 @@ import java.util.Random;
 
 public class Events{
 	private PMgnt pm;
-	private int pos_x;
-	private int pos_y;
+	private double pos_x;
+	private double pos_y;
 	private int area_x = 200;
 	private int area_y = 200;
 	private int rad_distance = 10;
@@ -77,12 +77,12 @@ public class Events{
 	
 	
 	public boolean incenter(int x, int y){
-		int xmin=0;
-		int xmax=0;
-		int ymin=0;
-		int ymax=0;
-		int centerx=0;
-		int centery=0;
+		double xmin=0;
+		double xmax=0;
+		double ymin=0;
+		double ymax=0;
+		double centerx=0;
+		double centery=0;
 		int i=0;
 		
 		for (Particle p : pm.particlesystem) {
@@ -168,7 +168,7 @@ public class Events{
 
 		//erster durchlauf:  Partikel finden und locken
 				if(zustand==0){
-					int distance = 0;
+					double distance = 0;
 
 					for (Particle p : pm.particlesystem) {
 						distance = p.getDistance(mouse_x, mouse_y);

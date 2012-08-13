@@ -102,7 +102,7 @@ public class Events{
 
 		//erster durchlauf:  Partikel finden und locken
 				if(zustand==0){
-					int distance = 0;
+					double distance = 0;
 
 					for (Particle p : pm.particlesystem) {
 						distance = p.getDistance(mouse_x, mouse_y);
