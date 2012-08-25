@@ -35,33 +35,13 @@ public class Events{
 	//f�r move
 	private int xstart;
 	private int ystart;
-	
-	//sound
-	private FileInputStream in;
-	private String path = "sounds/";//getClass().getResource("/sounds").getPath();
 
-	//Player-Instanz
-	private Player p;
+	private Mp3 player;
 	
 	public Events(PMgnt pm, TestParticleGUI testParticleGUI) {
 		this.gui = testParticleGUI;
 		this.pm = pm;
 		orad = pm.particlesystem[0].OUTER_RAD;
-		
-		
-		try {
-			in = new FileInputStream(path+"/CrazyLaugh.mp3");
-			p = new Player(in);
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JavaLayerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
 	}
 
 	//Events to forward to PMgmt and PE
@@ -272,16 +252,19 @@ public class Events{
 			zustand=0;
 		}	
 	}
-	
-	public void playMp3()
+	public void playGood()
 	{
-		try
-		{
-			// Abspielen
-			p.play();
-			p.close();
-		}
-		catch (JavaLayerException jle) { System.err.println ("Error: " + jle); }				
+		player = new Mp3();
+
+		player.isBad = false;
+		player.start();	
+	}
+	public void playBad()
+	{
+		player = new Mp3();
+
+		player.isBad = true;
+		player.start();	
 	}
 	
 }

@@ -181,13 +181,14 @@ public class TestParticleGUI extends JWindow {
 							gut++;
 							System.out.println("gut");
 							sauer=0;
-							event.playMp3();
+							event.playGood();
 						}
 						else{
 							if(gut>(-10))gut--;
 							System.out.println("boese"); 
 							sauer=50;
 							size(1200,600);
+							event.playBad();
 							}						
 						sauer();
 						panel.state=0;
