@@ -41,8 +41,7 @@ public class TestParticleGUI extends JWindow {
 	
 	public void size(int x, int y){
 		setSize(x,y);
-		centerOnScreen(this);
-			
+		centerOnScreen(this);		
 	}
 	
 	public void sauer(){
@@ -309,13 +308,20 @@ public class TestParticleGUI extends JWindow {
 		super.paint(g);
 		g.setColor(Color.green);
 		for (Particle p : pm.particlesystem) {
-			if(p.kind==0)
-			g.drawImage(texture,p.getLocation(0), p.getLocation(1),this);
+			if(p.kind==0){
+				int x = (int) p.getLocation(0);
+				int y = (int) p.getLocation(1);
+				g.drawImage(texture, x,y, this);
+			}
 			else if(p.kind==1){
-				g.drawImage(texture2,p.getLocation(0), p.getLocation(1),this);	
+				int x = (int) p.getLocation(0);
+				int y = (int) p.getLocation(1);
+				g.drawImage(texture2,x,y,this);	
 			}
 			else{
-				g.drawImage(texture3,p.getLocation(0), p.getLocation(1),this);	
+				int x = (int) p.getLocation(0);
+				int y = (int) p.getLocation(1);
+				g.drawImage(texture3,x,y,this);	
 			}
 		}
 	}

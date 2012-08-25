@@ -54,8 +54,8 @@ public class PMgnt {
 		int distance = 0;
 		while(!check){
 			for (int i = 0; i < particleCounter; i++) {
-				resultVector_x = pos_x - particlesystem[i].getLocation(0);
-				resultVector_y = pos_y - particlesystem[i].getLocation(1);
+				resultVector_x = (int) (pos_x - particlesystem[i].getLocation(0));
+				resultVector_y = (int) (pos_y - particlesystem[i].getLocation(1));
 				distance = calculateDistance(resultVector_x, resultVector_y);
 				if (distance <= rad_distance) {
 					check = true;
