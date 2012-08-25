@@ -181,6 +181,7 @@ public class TestParticleGUI extends JWindow {
 							gut++;
 							System.out.println("gut");
 							sauer=0;
+							event.playMp3();
 						}
 						else{
 							if(gut>(-10))gut--;
@@ -353,6 +354,30 @@ public class TestParticleGUI extends JWindow {
 		protected void paintComponent(Graphics g) {
 			g.drawImage(image, 0, 0, this);
 		}
+	}
+
+	public static BufferedImage getTexture() {
+		return texture;
+	}
+
+	public static void setTexture(BufferedImage texture) {
+		TestParticleGUI.texture = texture;
+	}
+
+	public static BufferedImage getTexture2() {
+		return texture2;
+	}
+
+	public static void setTexture2(BufferedImage texture2) {
+		TestParticleGUI.texture2 = texture2;
+	}
+
+	public static BufferedImage getTexture3() {
+		return texture3;
+	}
+
+	public static void setTexture3(BufferedImage texture3) {
+		TestParticleGUI.texture3 = texture3;
 	}
 	
 	

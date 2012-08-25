@@ -4,7 +4,12 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Random;
+
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 
 /*
@@ -31,10 +36,31 @@ public class Events{
 	private int xstart;
 	private int ystart;
 	
+	//sound
+	private FileInputStream in;
+	private String path = "sounds/";//getClass().getResource("/sounds").getPath();
+
+	//Player-Instanz
+	private Player p;
+	
 	public Events(PMgnt pm, TestParticleGUI testParticleGUI) {
 		this.gui = testParticleGUI;
 		this.pm = pm;
 		orad = pm.particlesystem[0].OUTER_RAD;
+		
+		
+		try {
+			in = new FileInputStream(path+"/CrazyLaugh.mp3");
+			p = new Player(in);
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JavaLayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -247,6 +273,16 @@ public class Events{
 		}	
 	}
 	
-
+	public void playMp3()
+	{
+		try
+		{
+			// Abspielen
+			p.play();
+			p.close();
+		}
+		catch (JavaLayerException jle) { System.err.println ("Error: " + jle); }				
+	}
+	
 }
 	
