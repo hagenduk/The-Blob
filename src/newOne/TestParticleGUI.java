@@ -312,9 +312,31 @@ public class TestParticleGUI extends JWindow {
 	}
 
 	public void paint(Graphics g) {
+		
+		double xmin=0;
+		double xmax=0;
+		double ymin=0;
+		double ymax=0;
+		double centerx=0;
+		double centery=0;
+		int i=0;
+		
+		for (Particle p : pm.particlesystem) {
+			if(i==0){xmin = p.getLocation(0); xmax = p.getLocation(0); ymin = p.getLocation(1); ymax = p.getLocation(1); i=1;}
+			if(p.getLocation(0) < xmin)	xmin = p.getLocation(0);
+			if(p.getLocation(0) > xmax)	xmax = p.getLocation(0);
+			if(p.getLocation(1) < ymin)	ymin = p.getLocation(1);
+			if(p.getLocation(1) > ymax)	ymax = p.getLocation(1);
+			}
+		
+		centerx=(xmax-xmin)/2;
+		centery=(ymax-ymin)/2;
+		
 		super.paint(g);
 		g.setColor(Color.green);
+		i=0;
 		for (Particle p : pm.particlesystem) {
+			if(!pm.pe.calc[i]){g.fillOval((int) centerx, (int) centery, (int) p.getLocation(0), (int)p.getLocation(1));}
 			if(p.kind==0){
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
@@ -333,6 +355,7 @@ public class TestParticleGUI extends JWindow {
 //				g.drawImage(texture3,x,y,this);
 				g.fillOval(x, y, 20, 20);
 			}
+			i++;
 		}
 	}
 
