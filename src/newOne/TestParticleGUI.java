@@ -38,6 +38,7 @@ public class TestParticleGUI extends JWindow {
 	private int state=0;
 	public int sauer=0;
 	public int gut=0;
+	public int particlecounterstate=0;
 	
 	public void size(int x, int y){
 		setSize(x,y);
@@ -120,6 +121,7 @@ public class TestParticleGUI extends JWindow {
 		if(gut<0 && gut>(-5))
 		try {
 			texture = ImageIO.read( new File( "images/texture04.png" ) );
+			if(particlecounterstate!=1){particlecounterstate=1; pm.insertparticle(2);}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -127,6 +129,7 @@ public class TestParticleGUI extends JWindow {
 		if(gut<(-5))
 			try {
 				texture = ImageIO.read( new File( "images/texture05.png" ) );
+				if(particlecounterstate!=2){particlecounterstate=2; pm.insertparticle(2);}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -134,6 +137,7 @@ public class TestParticleGUI extends JWindow {
 		if(gut==1)
 		try {
 			texture = ImageIO.read( new File( "images/texture03.png" ) );
+			if(particlecounterstate!=3){particlecounterstate+=3; pm.removeparticle(2);}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -141,6 +145,7 @@ public class TestParticleGUI extends JWindow {
 		if(gut==2)
 			try {
 				texture = ImageIO.read( new File( "images/texture02.png" ) );
+				if(particlecounterstate!=4){particlecounterstate+=4; pm.removeparticle(2);}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

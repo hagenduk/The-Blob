@@ -103,10 +103,10 @@ public class Events{
 		centery=(ymax-ymin)/2;
 		System.out.println("xmitte= " + centerx + "ymitte= " + centery);
 		System.out.println("xklick= " + x + "yklick= " + y);
-		System.out.println(xmax+ ", " + xmin+ ", " + ymin+ ", " + ymax);
-		if(x>(centerx+250) || x<(centerx-250)){ System.out.println("false1"); return false;}
+		//System.out.println(xmax+ ", " + xmin+ ", " + ymin+ ", " + ymax);
+		if(x>(centerx+250) || x<(centerx-250)){ /*System.out.println("false1");*/ return false;}
 		else if(y>(centery+250) || y<(centery-250)){ 	
-			System.out.println("false2"); 
+			//System.out.println("false2"); 
 			return false;
 		}
 		else{ System.out.println("true"); return true;}	
@@ -156,11 +156,11 @@ public class Events{
 			x_speed = rnd.nextInt(40)-20;
 			y_speed = rnd.nextInt(40)-20;
 			System.out.println("Poke erkannt!");
-			System.out.println(p.getSpeed(0));
-			System.out.println(p.getSpeed(1));
+			//System.out.println(p.getSpeed(0));
+			//System.out.println(p.getSpeed(1));
 			p.setSpeed(x_speed, y_speed);
-			System.out.println(p.getSpeed(0));
-			System.out.println(p.getSpeed(1));
+			//System.out.println(p.getSpeed(0));
+			//System.out.println(p.getSpeed(1));
 		}
 	}
 	
@@ -180,21 +180,22 @@ public class Events{
 						distance = p.getDistance(mouse_x, mouse_y);
 						if(distance <= orad+200){
 							gelocked =p;
+							
 							zustand=1;
 							break;
 						}
 					}
 					System.out.println("Partikel erkannt!");
-					System.out.println(gelocked.getSpeed(0));
-					System.out.println(gelocked.getSpeed(1));
+					//System.out.println(gelocked.getSpeed(0));
+					//System.out.println(gelocked.getSpeed(1));
 				}
 		
 		//Wenn schon ein Partikel gefunden bewegen		
 		if(zustand==1){		
 			gelocked.setLocation(mouse_x-100, mouse_y-100);
 			System.out.println("Partikel bewegt!");			
-			System.out.println(gelocked.getLocation(0));
-			System.out.println(gelocked.getLocation(1));
+			//System.out.println(gelocked.getLocation(0));
+			//System.out.println(gelocked.getLocation(1));
 //			gui.repaint();
 			
 		}
@@ -221,8 +222,8 @@ public class Events{
 					ystart=mouse_y;
 					zustand=1;
 					System.out.println("Partikel erkannt!");
-					System.out.println(xstart);
-					System.out.println(ystart);
+					//System.out.println(xstart);
+					//System.out.println(ystart);
 				}
 		
 		//Wenn start gesetzt partikelsystem bewegen, neuen start setzen		
@@ -236,8 +237,8 @@ public class Events{
 			for (Particle p : pm.particlesystem) {
 			p.setLocation(p.getLocation(0)+xmove, p.getLocation(1)+ymove);
 			System.out.println("Partikelsystem bewegt!");			
-			System.out.println(p.getLocation(0));
-			System.out.println(p.getLocation(1));
+			//System.out.println(p.getLocation(0));
+			//System.out.println(p.getLocation(1));
 
 			}
 //			gui.repaint();

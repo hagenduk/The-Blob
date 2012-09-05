@@ -3,7 +3,8 @@ package newOne;
 public class PMgnt {
 	
 	private int system_size = 0;
-	public Particle[] particlesystem; 
+	public Particle[] particlesystem;
+	public Particle[] particlesystem2; 
 	private int pos_x = 0;
 	private int pos_y = 0;
 	private int area_x = 0;
@@ -19,8 +20,37 @@ public class PMgnt {
 		particlesystem = new Particle[this.system_size];
 		createParticle();
 	}
+	
+	public void insertparticle(int number){
+		//Helper particle system
+		particlesystem2 = new Particle[particlesystem.length+number];
+		//loading old system in helper one
+		for(int i=0; i<particlesystem.length; i++ ){
+			particlesystem2[i]=particlesystem[i];
+		}
+		//add new particles
+		for(int i=0; i<number; i++ ){
+			pos_x = (int) ((Math.random()+1)*area_x);
+			pos_y = (int) ((Math.random()+1)*area_y);
+			particlesystem2[particlesystem.length+i] = new Particle(pos_x,pos_y);	
+		}
+		//switch the arrays
+		particlesystem=particlesystem2;		
+	}
 
-	private void createParticle() {
+	public void removeparticle(int number){
+		//Helper particle system
+		particlesystem2 = new Particle[particlesystem.length-number];
+		//loading old system in helper one
+		for(int i=0; i<particlesystem.length-number; i++ ){
+			particlesystem2[i]=particlesystem[i];
+		}
+		//switch the arrays
+		particlesystem=particlesystem2;		
+	}
+
+	
+private void createParticle() {
 		boolean done = false;
 		pos_x = (int) ((Math.random()+1)*area_x);
 		pos_y = (int) ((Math.random()+1)*area_y);
