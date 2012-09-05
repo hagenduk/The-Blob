@@ -2,6 +2,8 @@ package newOne;
 
 public class PhysicEngine {
 	
+	
+	public boolean[] calc;
 	/*
 	 * vars is the presentation of location and speed of every particle in the matter of 
 	 * 0	1	2	3		4	...
@@ -10,7 +12,7 @@ public class PhysicEngine {
 	 * It is used for computating inside the PhysicEngine Class
 	 * The method modifyObjects() applies the computed locations and speeds to the pm
 	 */
-	protected double[] vars;
+	public double[] vars;
 	
 	/*
 	 * The Particle Mngt to be worked with
@@ -44,6 +46,10 @@ public class PhysicEngine {
 			vars[4*i + 2] = pm[i].getSpeed(0);
 			vars[4*i + 3] = pm[i].getSpeed(1);
 		}
+		this.calc = new boolean[pm.length];
+		for (int i = 0; i < pm.length; i++) {
+			calc[i] = true;
+		}
 	}
 	/*
 	 * Runge Kutta Algorithm, computes the most accurate forecast of position for 4 iterations
@@ -69,9 +75,10 @@ public class PhysicEngine {
 		evaluate(inp, k4); // evaluate at time t+stepSize
 		// modify the variables
 		for (i = 0; i < N; i++)
-			// if (calc[i])
+			if (calc[i]){
 			vars[i] = vars[i] + (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i])
 					* stepSize / 6;
+			}
 
 	}
 
