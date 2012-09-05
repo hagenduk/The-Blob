@@ -10,7 +10,7 @@ package newOne;
 		private static final int YAREA_PART_MGNT = 100; 	// Sammelpunkt der Partikel 
 		
 		private static final int REFRESH_TIME = 60;	// Refresh rate (17)
-		private static final int PARTICLES = 10;		// Amount of Particles
+		private static final int PARTICLES = 5;		// Amount of Particles
 		private static final int PARTICLE_RADIUS = 20;  // Particle radius
 		
 		
@@ -20,6 +20,7 @@ package newOne;
 			
 			t1.setVisible(true);
 			PhysicEngine pe = new PhysicEngine(pm.particlesystem);
+			pm.pe=pe;
 			
 			//pe.stop();
 			while(true){

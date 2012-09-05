@@ -11,6 +11,7 @@ public class PMgnt {
 	private int area_y = 0;
 	private int rad_distance = 0;
 	private int particleCounter = 0;
+	public PhysicEngine pe;
 	
 	public PMgnt(int system_size, int area_x, int area_y, int rad_distance){
 		this.system_size = system_size;
@@ -39,14 +40,16 @@ public class PMgnt {
 	}
 
 	public void removeparticle(int number){
-		//Helper particle system
-		particlesystem2 = new Particle[particlesystem.length-number];
-		//loading old system in helper one
-		for(int i=0; i<particlesystem.length-number; i++ ){
-			particlesystem2[i]=particlesystem[i];
+		if(particlesystem.length>3){
+			//Helper particle system
+			particlesystem2 = new Particle[particlesystem.length-number];
+			//loading old system in helper one
+			for(int i=particlesystem.length; i>number; i-- ){
+				particlesystem2[i-number]=particlesystem[i];
+			}
+			//switch the arrays
+			particlesystem=particlesystem2;
 		}
-		//switch the arrays
-		particlesystem=particlesystem2;		
 	}
 
 	

@@ -318,17 +318,20 @@ public class TestParticleGUI extends JWindow {
 			if(p.kind==0){
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
-				g.drawImage(texture, x,y, this);
+//				g.drawImage(texture, x,y, this);
+				g.fillOval(x, y, 20, 20);
 			}
 			else if(p.kind==1){
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
-				g.drawImage(texture2,x,y,this);	
+//				g.drawImage(texture2,x,y,this);
+				g.fillOval(x, y, 20, 20);
 			}
 			else{
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
-				g.drawImage(texture3,x,y,this);	
+//				g.drawImage(texture3,x,y,this);
+				g.fillOval(x, y, 20, 20);
 			}
 		}
 	}
