@@ -121,7 +121,7 @@ public class TestParticleGUI extends JWindow {
 		if(gut<0 && gut>(-5))
 		try {
 			texture = ImageIO.read( new File( "images/texture04.png" ) );
-			if(particlecounterstate!=1){particlecounterstate=1; pm.insertparticle(2);}
+			if(particlecounterstate!=1){particlecounterstate=1; pm.insertparticle(1);}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -129,7 +129,7 @@ public class TestParticleGUI extends JWindow {
 		if(gut<(-5))
 			try {
 				texture = ImageIO.read( new File( "images/texture05.png" ) );
-				if(particlecounterstate!=2){particlecounterstate=2; pm.insertparticle(2);}
+				if(particlecounterstate!=2){particlecounterstate=2; pm.insertparticle(1);}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -137,7 +137,7 @@ public class TestParticleGUI extends JWindow {
 		if(gut==1)
 		try {
 			texture = ImageIO.read( new File( "images/texture03.png" ) );
-			if(particlecounterstate!=3){particlecounterstate+=3; pm.removeparticle(2);}
+			if(particlecounterstate!=3){particlecounterstate+=3; pm.removeparticle(1);}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -145,7 +145,7 @@ public class TestParticleGUI extends JWindow {
 		if(gut==2)
 			try {
 				texture = ImageIO.read( new File( "images/texture02.png" ) );
-				if(particlecounterstate!=4){particlecounterstate+=4; pm.removeparticle(2);}
+				if(particlecounterstate!=4){particlecounterstate+=4; pm.removeparticle(1);}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -192,7 +192,7 @@ public class TestParticleGUI extends JWindow {
 							if(gut>(-10))gut--;
 							System.out.println("boese"); 
 							sauer=50;
-							size(1200,600);
+							//size(1200,600);
 							event.playBad();
 							}						
 						sauer();
@@ -340,20 +340,20 @@ public class TestParticleGUI extends JWindow {
 			if(p.kind==0){
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
-//				g.drawImage(texture, x,y, this);
-				g.fillOval(x, y, 20, 20);
+				g.drawImage(texture, x,y, this);
+//				g.fillOval(x, y, 20, 20);
 			}
 			else if(p.kind==1){
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
-//				g.drawImage(texture2,x,y,this);
-				g.fillOval(x, y, 20, 20);
+				g.drawImage(texture2,x,y,this);
+//				g.fillOval(x, y, 20, 20);
 			}
 			else{
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
-//				g.drawImage(texture3,x,y,this);
-				g.fillOval(x, y, 20, 20);
+				g.drawImage(texture3,x,y,this);
+//				g.fillOval(x, y, 20, 20);
 			}
 			i++;
 		}
