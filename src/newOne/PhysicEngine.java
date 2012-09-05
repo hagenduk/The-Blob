@@ -18,7 +18,6 @@ public class PhysicEngine {
 	 * The Particle Mngt to be worked with
 	 */
 	private Particle[] pm;
-	
 	/*
 	 * Physical Constants
 	 */
@@ -75,7 +74,7 @@ public class PhysicEngine {
 		evaluate(inp, k4); // evaluate at time t+stepSize
 		// modify the variables
 		for (i = 0; i < N; i++)
-			if (calc[i]){
+			if (calc[i/4]){
 			vars[i] = vars[i] + (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i])
 					* stepSize / 6;
 			}
