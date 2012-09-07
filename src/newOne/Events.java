@@ -62,13 +62,13 @@ public class Events{
 			for (Particle p : pm.particlesystem) {
 				x_speed = rnd.nextInt(100);
 				y_speed = rnd.nextInt(100);
-				xpos = rnd.nextInt(1200);
-				ypos = rnd.nextInt(800);
+				//xpos = rnd.nextInt(1200);
+				//ypos = rnd.nextInt(800);
 				
 				System.out.println("chemie erkannt!");
 				//System.out.println(p.getSpeed(0));
 				//System.out.println(p.getSpeed(1));
-				p.setLocation(xpos, ypos);
+				//p.setLocation(xpos, ypos);
 				p.setSpeed(x_speed, y_speed);
 				//System.out.println(p.getSpeed(0));
 				//System.out.println(p.getSpeed(1));
@@ -101,15 +101,15 @@ public class Events{
 		
 		centerx=(xmax-xmin)/2;
 		centery=(ymax-ymin)/2;
-		System.out.println("xmitte= " + centerx + "ymitte= " + centery);
-		System.out.println("xklick= " + x + "yklick= " + y);
+		//System.out.println("xmitte= " + centerx + "ymitte= " + centery);
+		//System.out.println("xklick= " + x + "yklick= " + y);
 		//System.out.println(xmax+ ", " + xmin+ ", " + ymin+ ", " + ymax);
-		if(x>(centerx+250) || x<(centerx-250)){ /*System.out.println("false1");*/ return false;}
-		else if(y>(centery+250) || y<(centery-250)){ 	
+		if(x>(centerx+150) || x<(centerx-150)){ /*System.out.println("false1");*/ return false;}
+		else if(y>(centery+150) || y<(centery-150)){ 	
 			//System.out.println("false2"); 
 			return false;
 		}
-		else{ System.out.println("true"); return true;}	
+		else{ /*System.out.println("true");*/ return true;}	
 	}
 	
 	
@@ -152,13 +152,16 @@ public class Events{
 		float x_speed;
 		float y_speed;
 		Random rnd = new Random();
-		for (Particle p : pm.particlesystem) {
+		for (int i=0; i<pm.particlesystem.length; i++) {
 			x_speed = rnd.nextInt(40)-20;
 			y_speed = rnd.nextInt(40)-20;
 			System.out.println("Poke erkannt!");
 			//System.out.println(p.getSpeed(0));
 			//System.out.println(p.getSpeed(1));
-			p.setSpeed(x_speed, y_speed);
+			pm.pe.calc[i]=false;
+			pm.pe.vars[4*i+2]=x_speed; 
+			pm.pe.vars[4*i+3]=y_speed;
+			pm.pe.calc[i]=true;
 			//System.out.println(p.getSpeed(0));
 			//System.out.println(p.getSpeed(1));
 		}
@@ -179,7 +182,7 @@ public class Events{
 
 					for (int i=0; i<pm.particlesystem.length; i++) {
 						distance = pm.particlesystem[i].getDistance(mouse_x, mouse_y);
-						if(distance <= orad+200){
+						if(distance <= orad+100){
 							gelocked =pm.particlesystem[i];
 							pm.pe.calc[i]=false;
 							partikelid=i;

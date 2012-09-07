@@ -23,7 +23,7 @@ public class PMgnt {
 	}
 	
 	public void insertparticle(int number){
-		//Helper particle system
+		/*//Helper particle system
 		particlesystem2 = new Particle[particlesystem.length+number];
 		//loading old system in helper one
 		for(int i=0; i<particlesystem.length; i++ ){
@@ -33,23 +33,58 @@ public class PMgnt {
 		for(int i=0; i<number; i++ ){
 			pos_x = (int) ((Math.random()+1)*area_x);
 			pos_y = (int) ((Math.random()+1)*area_y);
-			particlesystem2[particlesystem.length+i] = new Particle(pos_x,pos_y);	
+			particlesystem2[particlesystem.length+i-1] = new Particle(pos_x,pos_y);	
 		}
 		//switch the arrays
-		particlesystem=particlesystem2;		
+		particlesystem=particlesystem2;
+		//create new physicsarray
+		double[] newvars= new double[particlesystem.length*4];
+		for(int i=0; i>number; i+=4){
+			for(int j=0; j<4; j++){
+				if(j==0){newvars[i+j]=particlesystem[i].getLocation(0);}
+				if(j==1){newvars[i+j]=particlesystem[i].getLocation(1);}
+				if(j==2){newvars[i+j]=particlesystem[i].getSpeed(0);}
+				if(j==3){newvars[i+j]=particlesystem[i].getSpeed(1);}	
+			}
+		}
+		pe.vars = newvars;
+		//new calc array
+		boolean[] calc = new boolean[particlesystem.length];
+		for (int i = 0; i < calc.length; i++) {
+			calc[i] = true;
+		}
+		pe.calc=calc;*/
 	}
 
 	public void removeparticle(int number){
-		if(particlesystem.length>3){
+		//prevent errors
+		if(particlesystem.length>4){
 			//Helper particle system
 			particlesystem2 = new Particle[particlesystem.length-number];
 			//loading old system in helper one
-			for(int i=particlesystem.length; i>number; i-- ){
+			for(int i=particlesystem.length-1; i>number-1; i-- ){
 				particlesystem2[i-number]=particlesystem[i];
 			}
 			//switch the arrays
 			particlesystem=particlesystem2;
 		}
+		/*//create new physicsarray
+				double[] newvars= new double[particlesystem.length*4];
+				for(int i=0; i>number; i+=4){
+					for(int j=0; j<4; j++){
+						if(j==0){newvars[i+j]=particlesystem[i].getLocation(0);}
+						if(j==1){newvars[i+j]=particlesystem[i].getLocation(1);}
+						if(j==2){newvars[i+j]=particlesystem[i].getSpeed(0);}
+						if(j==3){newvars[i+j]=particlesystem[i].getSpeed(1);}	
+					}
+				}
+				pe.vars = newvars;
+				//new calc array
+				boolean[] calc = new boolean[particlesystem.length];
+				for (int i = 0; i < calc.length; i++) {
+					calc[i] = true;
+				}*/
+		
 	}
 
 	

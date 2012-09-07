@@ -1,11 +1,15 @@
 package newOne;
 
+import java.util.Random;
+
 public class Particle {
 	public final int INNER_RAD = 5;
 	public final int OUTER_RAD = 20;
 	private double[] location = new double[2];
 	private double[] speed = {0, 0};
 	public int kind=0; //TODO Was ist das?
+	Random rnd = new Random();
+	int choice = rnd.nextInt(3)+1;
 
 	Particle(double pos_x, double pos_y) {
 		this.location[0] = pos_x;
