@@ -5,6 +5,7 @@ public class Particle {
 	public final int OUTER_RAD = 20;//Lieber beim erstellen im PMgnt festlegen?
 	private double[] location = new double[2];
 	private double[] speed = {0, 0};
+	private boolean locked = false;
 
 	Particle(double pos_x, double pos_y) {
 		this.location[0] = pos_x;
@@ -29,6 +30,14 @@ public class Particle {
 		this.speed[1] = y_speed;
 	}
 	
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
 	/**
 	 * Calculates distance between two particles
 	 * @param p1 Particle

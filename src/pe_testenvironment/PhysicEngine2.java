@@ -2,6 +2,8 @@ package pe_testenvironment;
 
 public class PhysicEngine2 {
 	
+	
+	public boolean[] calc;
 	/*
 	 * vars is the presentation of location and speed of every particle in the matter of 
 	 * 0	1	2	3		4	...
@@ -10,13 +12,12 @@ public class PhysicEngine2 {
 	 * It is used for computating inside the PhysicEngine Class
 	 * The method modifyObjects() applies the computed locations and speeds to the pm
 	 */
-	protected double[] vars;
+	public double[] vars;
 	
 	/*
 	 * The Particle Mngt to be worked with
 	 */
 	private Particle[] pm;
-	
 	/*
 	 * Physical Constants
 	 */
@@ -35,7 +36,7 @@ public class PhysicEngine2 {
 	 * It is used for computating inside the PhysicEngine Class
 	 * The method modifyObjects() applies the computed locations and speeds to the pm
 	 */
-	public PhysicEngine2(Particle[] pm) {
+	public PhysicEngine(Particle[] pm) {
 		this.pm = pm;
 		this.vars = new double[pm.length * 4];
 		for (int i = 0; i < pm.length; i++) {
@@ -43,6 +44,10 @@ public class PhysicEngine2 {
 			vars[4*i + 1] = pm[i].getLocation(1);
 			vars[4*i + 2] = pm[i].getSpeed(0);
 			vars[4*i + 3] = pm[i].getSpeed(1);
+		}
+		this.calc = new boolean[pm.length];
+		for (int i = 0; i < pm.length; i++) {
+			calc[i] = true;
 		}
 	}
 	/*
@@ -69,9 +74,10 @@ public class PhysicEngine2 {
 		evaluate(inp, k4); // evaluate at time t+stepSize
 		// modify the variables
 		for (i = 0; i < N; i++)
-			// if (calc[i])
+			if (calc[i/4]){
 			vars[i] = vars[i] + (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i])
 					* stepSize / 6;
+			}
 
 	}
 

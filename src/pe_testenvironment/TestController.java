@@ -19,7 +19,7 @@ package pe_testenvironment;
 			TestParticleGUI t1 = new TestParticleGUI(pm,PARTICLE_RADIUS, XAREA,YAREA);
 			
 			t1.setVisible(true);
-			PhysicEngine2 pe = new PhysicEngine2(pm.particlesystem);
+			PhysicEngine3 pe = new PhysicEngine3(pm.particlesystem);
 			
 			//pe.stop();
 			while(true){

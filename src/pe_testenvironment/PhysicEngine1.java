@@ -6,7 +6,7 @@ package pe_testenvironment;
  * @author eifinger
  *
  */
-public class PhysicEngine {
+public class PhysicEngine1 {
 	
 	/**
 	 * Is used to slow the particles down. 
