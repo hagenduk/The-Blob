@@ -3,19 +3,10 @@ package pe_testenvironment;
 public class PhysicEngine3 {
 	
 	/*
-	 * vars is the presentation of location and speed of every particle in the matter of 
-	 * 0	1	2	3		4	...
-	 * Ux	Uy	Vx	Vy		U1x	...
-	 * 
-	 * It is used for computating inside the PhysicEngine Class
-	 * The method modifyObjects() applies the computed locations and speeds to the pm
-	 */
-	protected double[] vars;
-	
-	/*
 	 * The Particle Mngt to be worked with
 	 */
 	private Particle[] pm;
+	//Helper
 	private PMgnt tmp_pmgnt;
 	private Particle[] tmp_pm;
 	
@@ -31,10 +22,6 @@ public class PhysicEngine3 {
 	private double DAMPING = 0.1;
 	
 	/*
-	 * vars is the presentation of location and speed of every particle in the matter of 
-	 * 0	1	2	3		4	...
-	 * Ux	Uy	Vx	Vy		U1x	...
-	 * 
 	 * It is used for computating inside the PhysicEngine Class
 	 * The method modifyObjects() applies the computed locations and speeds to the pm
 	 */
@@ -143,7 +130,6 @@ public class PhysicEngine3 {
 		}
 
 	public void modifyObjects() {
-		double w = pm[0].OUTER_RAD / 2;
 		for (int i = 0; i < pm.length; i++) {
 			pm[i].setLocation((tmp_pm[i].getLocation(0)), (tmp_pm[i].getLocation(1) ));
 			pm[i].setSpeed((tmp_pm[i].getSpeed(0)), (tmp_pm[i].getSpeed(1)));
