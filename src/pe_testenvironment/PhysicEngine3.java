@@ -1,18 +1,28 @@
 package pe_testenvironment;
-
+/**
+ * 
+ * @author eifinger
+ * Creates a Instance of a Physic Engine which is used for making the Blob "wobble".
+ * It computes the forces between Particles and moves them.
+ */
 public class PhysicEngine3 {
 	
-	/*
-	 * The Particle Mngt to be worked with
+	/**
+	 * The Particle System to be worked with
 	 */
 	private Particle[] pm;
-	//Helper
+	/**
+	 * Helper Particle Management used for creation of Helper Particle System
+	 */
 	private PMgnt tmp_pmgnt;
+	/**
+	 * Helper Particle System used for computation
+	 */
 	private Particle[] tmp_pm;
 	
 	
 	/*
-	 * Physical Constants
+	 * Physical Constants can be changed via getter/setter methods
 	 */
 	
 	private double SPRINGCONSTANT = 6;
@@ -20,23 +30,33 @@ public class PhysicEngine3 {
 	private double LEN = 100;
 	private double GRAVITY = 0;
 	private double DAMPING = 0.1;
-	
 	/*
-	 * It is used for computating inside the PhysicEngine Class
+	 * End Physical Constants
+	 */
+	
+	/**
+	 * Applies forces to particles and step() computates the next step in the simulation
 	 * The method modifyObjects() applies the computed locations and speeds to the pm
 	 */
 	public PhysicEngine3(Particle[] pm) {
 		this.pm = pm;
 	}
-	/*
-	 * Runge Kutta Algorithm, computes the most accurate forecast of position for 4 iterations
+	
+	/**
+	 * Runge Kutta Algorithm, computes the most accurate forecast of position and speed for 4 iterations
 	 */
 	public void step(double stepSize) {
+		/*
+		 * Reset the Helper pm
+		 */
 		tmp_pmgnt = new PMgnt(10,600,600,10);
 		tmp_pmgnt.createParticle();
 		tmp_pm = tmp_pmgnt.particlesystem;
 		int i;
 		int N = pm.length;
+		/*
+		 * Create Helper Particle Systems for each iteration and initialize them
+		 */
 		PMgnt pm0 = new PMgnt(N,600,600,10);
 		PMgnt pm1 = new PMgnt(N,600,600,10);
 		PMgnt pm2 = new PMgnt(N,600,600,10);
@@ -71,7 +91,9 @@ public class PhysicEngine3 {
 			inp[i].setSpeed(pm[i].getSpeed(0) + k3[i].getSpeed(0) * stepSize, pm[i].getSpeed(1) + k3[i].getSpeed(1) * stepSize);
 		}
 		evaluate(inp, k4); // evaluate at time t+stepSize
-		// modify the variables
+		/*
+		 *  Input the results into the tmp pm
+		 */
 		for (i = 0; i < N; i++){
 			 if (!pm[i].isLocked()){
 			tmp_pm[i].setLocation(
@@ -105,7 +127,11 @@ public class PhysicEngine3 {
 		}
 
 	}
-
+	/**
+	 * Evaluates all changes in position and speed for all particles and writes them into the change pm
+	 * @param inp
+	 * @param change
+	 */
 	public void evaluate(Particle[] inp, Particle[] change) {
 		for (int i = 0; i < inp.length; i++) {
 				change[i].setLocation(inp[i].getSpeed(0), inp[i].getSpeed(1));// derivative of position U is velocity V
@@ -128,27 +154,16 @@ public class PhysicEngine3 {
 				change[i].setSpeed(x,y);
 			}
 		}
-
+	/**
+	 * Applies the computed new positions and speeds to the actual pm
+	 */
 	public void modifyObjects() {
 		for (int i = 0; i < pm.length; i++) {
 			pm[i].setLocation((tmp_pm[i].getLocation(0)), (tmp_pm[i].getLocation(1) ));
 			pm[i].setSpeed((tmp_pm[i].getSpeed(0)), (tmp_pm[i].getSpeed(1)));
 		}
 	}
-	/*
-	 * Sets Particles in a stable round position
-	 */
-	public void stop(){
-		//TODO Fix central point
-		double r = 1; // radius
-	    for (int i=0; i<pm.length; i++)
-	    {
-	      double rnd = 1+ 0.1*Math.random();
-	      vars[0 + i*4] = r*Math.cos(rnd*i*2*Math.PI/pm.length);
-	      vars[1 + i*4] = r*Math.sin(rnd*i*2*Math.PI/pm.length);
-	    }
-	    
-	}
+
 	public double getSPRINGCONSTANT() {
 		return SPRINGCONSTANT;
 	}

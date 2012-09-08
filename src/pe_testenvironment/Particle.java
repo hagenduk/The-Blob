@@ -5,7 +5,7 @@ public class Particle {
 	public final int OUTER_RAD = 20;//Lieber beim erstellen im PMgnt festlegen?
 	private double[] location = new double[2];
 	private double[] speed = {0, 0};
-	private boolean locked = false;
+	private boolean locked = false; //Is set true when the particle is being used by an event and shouldn't be computed by the PE
 
 	Particle(double pos_x, double pos_y) {
 		this.location[0] = pos_x;
