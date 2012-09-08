@@ -9,7 +9,7 @@ public class Particle {
 	private double[] speed = {0, 0};
 	public int kind=0; //TODO Was ist das?
 	Random rnd = new Random();
-	int choice = rnd.nextInt(3)+1;
+	int choice = rnd.nextInt(5)+1;
 	private boolean locked = false; //Is set true when the particle is being used by an event and shouldn't be computed by the PE
 
 

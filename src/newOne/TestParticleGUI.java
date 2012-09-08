@@ -32,6 +32,8 @@ public class TestParticleGUI extends JWindow {
 	private static BufferedImage texture;
 	private static BufferedImage texturea;
 	private static BufferedImage textureb;
+	private static BufferedImage texturec;
+	private static BufferedImage textured;
 	private static BufferedImage texture2;
 	private static BufferedImage texture3;
 	private PMgnt pm;
@@ -120,6 +122,8 @@ public class TestParticleGUI extends JWindow {
 			texture = ImageIO.read( new File( "images/texture01.png" ) );
 			texturea = ImageIO.read( new File( "images/texture011.png" ) );
 			textureb = ImageIO.read( new File( "images/texture0111.png" ) );
+			texturec = ImageIO.read( new File( "images/texture01111.png" ) );
+			textured = ImageIO.read( new File( "images/texture011111.png" ) );
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -129,6 +133,8 @@ public class TestParticleGUI extends JWindow {
 			texture = ImageIO.read( new File( "images/texture04.png" ) );
 			texturea = ImageIO.read( new File( "images/texture044.png" ) );
 			textureb = ImageIO.read( new File( "images/texture0444.png" ) );
+			texturec = ImageIO.read( new File( "images/texture04444.png" ) );
+			textured = ImageIO.read( new File( "images/texture044444.png" ) );
 			if(particlecounterstate!=1){particlecounterstate=1; pm.insertparticle(1);}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -139,6 +145,8 @@ public class TestParticleGUI extends JWindow {
 				texture = ImageIO.read( new File( "images/texture05.png" ) );
 				texturea = ImageIO.read( new File( "images/texture055.png" ) );
 				textureb = ImageIO.read( new File( "images/texture0555.png" ) );
+				texturec = ImageIO.read( new File( "images/texture05555.png" ) );
+				textured = ImageIO.read( new File( "images/texture055555.png" ) );
 				if(particlecounterstate!=2){particlecounterstate=2; pm.insertparticle(1);}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -149,6 +157,8 @@ public class TestParticleGUI extends JWindow {
 			texture = ImageIO.read( new File( "images/texture03.png" ) );
 			texturea = ImageIO.read( new File( "images/texture033.png" ) );
 			textureb = ImageIO.read( new File( "images/texture0333.png" ) );
+			texturec = ImageIO.read( new File( "images/texture03333.png" ) );
+			textured = ImageIO.read( new File( "images/texture033333.png" ) );
 			if(particlecounterstate!=3){particlecounterstate+=3; pm.removeparticle(1);}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -159,6 +169,8 @@ public class TestParticleGUI extends JWindow {
 				texture = ImageIO.read( new File( "images/texture02.png" ) );
 				texturea = ImageIO.read( new File( "images/texture02.png" ) );
 				textureb = ImageIO.read( new File( "images/texture02.png" ) );
+				texturec = ImageIO.read( new File( "images/texture02.png" ) );
+				textured = ImageIO.read( new File( "images/texture02.png" ) );
 				if(particlecounterstate!=4){particlecounterstate+=4; pm.removeparticle(1);}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -358,10 +370,11 @@ public class TestParticleGUI extends JWindow {
 			if(p.kind==0){
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
-				
 				if(p.choice==1) g.drawImage(texture, x-75,y-70, this);
 				if(p.choice==2) g.drawImage(texturea, x-70,y-80, this);
 				if(p.choice==3) g.drawImage(textureb, x-40,y-30, this);
+				if(p.choice==4) g.drawImage(texturec, x-30,y-15, this);
+				if(p.choice==5) g.drawImage(textured, x-35,y-25, this);
 //				g.fillOval(x, y, 20, 20);
 			}
 			else if(p.kind==1){

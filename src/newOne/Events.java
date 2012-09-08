@@ -106,8 +106,8 @@ public class Events{
 		//System.out.println("xmitte= " + centerx + "ymitte= " + centery);
 		//System.out.println("xklick= " + x + "yklick= " + y);
 		//System.out.println(xmax+ ", " + xmin+ ", " + ymin+ ", " + ymax);
-		if(x>(centerx+150) || x<(centerx-150)){ /*System.out.println("false1");*/ return false;}
-		else if(y>(centery+150) || y<(centery-150)){ 	
+		if(x>(centerx+170) || x<(centerx-170)){ /*System.out.println("false1");*/ return false;}
+		else if(y>(centery+170) || y<(centery-170)){ 	
 			//System.out.println("false2"); 
 			return false;
 		}
@@ -165,10 +165,11 @@ public class Events{
 			//pm.pe.vars[4*i+2]=x_speed; 
 			//pm.pe.vars[4*i+3]=y_speed;
 			p.setLocked(false);
-			playnlol();
+			
 			//System.out.println(p.getSpeed(0));
 			//System.out.println(p.getSpeed(1));
 		}
+		playnlol();
 	}
 	
 	
