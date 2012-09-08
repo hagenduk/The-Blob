@@ -10,6 +10,8 @@ public class Particle {
 	public int kind=0; //TODO Was ist das?
 	Random rnd = new Random();
 	int choice = rnd.nextInt(3)+1;
+	private boolean locked = false; //Is set true when the particle is being used by an event and shouldn't be computed by the PE
+
 
 	Particle(double pos_x, double pos_y) {
 		this.location[0] = pos_x;
@@ -33,6 +35,15 @@ public class Particle {
 		this.speed[0] = x_speed;
 		this.speed[1] = y_speed;
 	}
+	
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
 	
 	/**
 	 * Calculates distance between two particles

@@ -60,8 +60,10 @@ public class Events{
 			int ypos;
 			Random rnd = new Random();
 			for (Particle p : pm.particlesystem) {
+				p.setLocked(true);
 				x_speed = rnd.nextInt(100);
 				y_speed = rnd.nextInt(100);
+				p.setLocked(false);
 				//xpos = rnd.nextInt(1200);
 				//ypos = rnd.nextInt(800);
 				
@@ -152,16 +154,18 @@ public class Events{
 		float x_speed;
 		float y_speed;
 		Random rnd = new Random();
-		for (int i=0; i<pm.particlesystem.length; i++) {
+		for (Particle p : pm.particlesystem) {
 			x_speed = rnd.nextInt(40)-20;
 			y_speed = rnd.nextInt(40)-20;
 			System.out.println("Poke erkannt!");
 			//System.out.println(p.getSpeed(0));
 			//System.out.println(p.getSpeed(1));
-			pm.pe.calc[i]=false;
-			pm.pe.vars[4*i+2]=x_speed; 
-			pm.pe.vars[4*i+3]=y_speed;
-			pm.pe.calc[i]=true;
+			p.setLocked(true);
+			p.setSpeed(x_speed, y_speed);
+			//pm.pe.vars[4*i+2]=x_speed; 
+			//pm.pe.vars[4*i+3]=y_speed;
+			p.setLocked(false);
+			playBad();
 			//System.out.println(p.getSpeed(0));
 			//System.out.println(p.getSpeed(1));
 		}
@@ -176,16 +180,14 @@ public class Events{
 		//(4)partikel unlocken(taste loslassen)
 
 		//erster durchlauf:  Partikel finden und locken
-				int partikelid=0;
 				if(zustand==0){
 					double distance = 0;
 
-					for (int i=0; i<pm.particlesystem.length; i++) {
-						distance = pm.particlesystem[i].getDistance(mouse_x, mouse_y);
+					for (Particle p : pm.particlesystem) {
+						distance = p.getDistance(mouse_x, mouse_y);
 						if(distance <= orad+100){
-							gelocked =pm.particlesystem[i];
-							pm.pe.calc[i]=false;
-							partikelid=i;
+							gelocked =p;
+							p.setLocked(true);
 							zustand=1;
 							break;
 						}
@@ -197,9 +199,10 @@ public class Events{
 		
 		//Wenn schon ein Partikel gefunden bewegen		
 		if(zustand==1){		
-			pm.pe.vars[4*partikelid]=mouse_x-100; //gelocked.setLocation(mouse_x-100, mouse_y-100);
-			pm.pe.vars[4*partikelid+1]=mouse_y-100;
-			pm.pe.calc[partikelid]=true;
+			gelocked.setLocation(mouse_x-100, mouse_y-100);
+			//pm.pe.vars[4*partikelid+1]=mouse_y-100;
+			//pm.pe.calc[partikelid]=true;
+			gelocked.setLocked(false);
 			System.out.println("Partikel bewegt!");			
 			//System.out.println(gelocked.getLocation(0));
 			//System.out.println(gelocked.getLocation(1));
@@ -209,7 +212,8 @@ public class Events{
 		
 		//Wenn ein Partikel gefunden wurde und ende �bergeben wird freigeben
 		if(zustand==1 && ende){
-			System.out.println("Partikel freigegeben!");			
+			System.out.println("Partikel freigegeben!");
+			playBad();
 			gelocked=null;
 			zustand=0;
 		}
@@ -241,12 +245,12 @@ public class Events{
 			xstart=mouse_x;
 			ystart=mouse_y;
 			
-			for (int i=0; i<pm.particlesystem.length;i++) {
-			pm.pe.calc[i]=false;
-			//p.setLocation(p.getLocation(0)+xmove, p.getLocation(1)+ymove);
-			pm.pe.vars[4*i]+=xmove; //gelocked.setLocation(mouse_x-100, mouse_y-100);
-			pm.pe.vars[4*i+1]+=ymove;
-			pm.pe.calc[i]=true;
+			for (Particle p : pm.particlesystem) {
+			p.setLocked(true);
+			p.setLocation(p.getLocation(0)+xmove, p.getLocation(1)+ymove);
+			//pm.pe.vars[4*i]+=xmove; //gelocked.setLocation(mouse_x-100, mouse_y-100);
+			//pm.pe.vars[4*i+1]+=ymove;
+			p.setLocked(false);
 			System.out.println("Partikelsystem bewegt!");			
 			//System.out.println(p.getLocation(0));
 			//System.out.println(p.getLocation(1));
@@ -258,7 +262,8 @@ public class Events{
 		
 		//Wenn start gesetzt wurde und ende �bergeben wird freigeben
 		if(zustand==1 && ende){
-			System.out.println("Move ende!");			
+			System.out.println("Move ende!");
+			playGood();
 			xstart=0;
 			ystart=0;
 			zustand=0;
@@ -266,17 +271,17 @@ public class Events{
 	}
 	public void playGood()
 	{
-		player = new Mp3();
+		player = new Mp3("good");
 
-		player.isBad = false;
-		player.start();	
+		//player.isBad = false;
+		player.start();
+		//player.run("good");	
 	}
 	public void playBad()
 	{
-		player = new Mp3();
+		player = new Mp3("bad");
 
-		player.isBad = true;
-		player.start();	
+		//player.run("bad");	
 	}
 	
 }

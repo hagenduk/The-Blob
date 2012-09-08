@@ -20,6 +20,7 @@ public class PMgnt {
 		this.rad_distance = rad_distance;
 		particlesystem = new Particle[this.system_size];
 		createParticle();
+		particleCounter = 0;
 	}
 	
 	public void insertparticle(int number){
@@ -88,7 +89,7 @@ public class PMgnt {
 	}
 
 	
-private void createParticle() {
+public void createParticle() {
 		boolean done = false;
 		pos_x = (int) ((Math.random()+1)*area_x);
 		pos_y = (int) ((Math.random()+1)*area_y);

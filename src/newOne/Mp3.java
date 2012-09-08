@@ -19,17 +19,18 @@ public class Mp3 extends Thread{
 	private Player pGood;
 	private Player pBad;
 	private Player p;
+	private String was;
 	
-	public boolean isBad = true;
 
-	public Mp3 (){
+	public Mp3 (String was){
+		was=this.was;
 		try {
 			inGood = new FileInputStream(path+"/CrazyLaugh.mp3");
 			pGood = new Player(inGood);
 	
 			inBad = new FileInputStream(path+"/Angry.mp3");
 			pBad = new Player(inBad);
-			
+			//run(was);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,10 +67,11 @@ public class Mp3 extends Thread{
 		Mp3.currentThread().interrupt();
 	}
 	
-	public void run(){
-		if(isBad){
+	public void run(String was){
+		if(this.was.equals("bad")){
 			runBad();
-		}else{
+		}
+		if(this.was.equals("good")){
 			runGood();
 		}
 	}

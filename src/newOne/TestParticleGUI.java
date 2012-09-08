@@ -350,7 +350,7 @@ public class TestParticleGUI extends JWindow {
 		g.setColor(Color.green);
 		i=0;
 		for (Particle p : pm.particlesystem) {
-			if(!pm.pe.calc[i]){g.fillOval((int) centerx, (int) centery, (int) p.getLocation(0), (int)p.getLocation(1));}
+			if(p.isLocked()){g.fillOval((int) centerx, (int) centery, (int) p.getLocation(0), (int)p.getLocation(1));}
 			if(p.kind==0){
 				int x = (int) p.getLocation(0);
 				int y = (int) p.getLocation(1);
@@ -358,7 +358,7 @@ public class TestParticleGUI extends JWindow {
 				if(p.choice==1) g.drawImage(texture, x-75,y-70, this);
 				if(p.choice==2) g.drawImage(texturea, x-70,y-80, this);
 				if(p.choice==3) g.drawImage(textureb, x-40,y-30, this);
-				//g.fillOval(x, y, 20, 20);
+//				g.fillOval(x, y, 20, 20);
 			}
 			else if(p.kind==1){
 				int x = (int) p.getLocation(0);
