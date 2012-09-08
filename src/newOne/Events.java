@@ -165,7 +165,7 @@ public class Events{
 			//pm.pe.vars[4*i+2]=x_speed; 
 			//pm.pe.vars[4*i+3]=y_speed;
 			p.setLocked(false);
-			playBad();
+			playnlol();
 			//System.out.println(p.getSpeed(0));
 			//System.out.println(p.getSpeed(1));
 		}
@@ -213,7 +213,7 @@ public class Events{
 		//Wenn ein Partikel gefunden wurde und ende �bergeben wird freigeben
 		if(zustand==1 && ende){
 			System.out.println("Partikel freigegeben!");
-			playBad();
+			playnlol();
 			gelocked=null;
 			zustand=0;
 		}
@@ -263,7 +263,7 @@ public class Events{
 		//Wenn start gesetzt wurde und ende �bergeben wird freigeben
 		if(zustand==1 && ende){
 			System.out.println("Move ende!");
-			playGood();
+			playnlol();
 			xstart=0;
 			ystart=0;
 			zustand=0;
@@ -280,7 +280,14 @@ public class Events{
 	public void playBad()
 	{
 		player = new Mp3("bad");
-
+		player.start();
+		//player.run("bad");	
+	}
+	
+	public void playnlol()
+	{
+		player = new Mp3("nlol");
+		player.start();
 		//player.run("bad");	
 	}
 	

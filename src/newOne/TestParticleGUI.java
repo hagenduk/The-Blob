@@ -220,9 +220,11 @@ public class TestParticleGUI extends JWindow {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				System.out.println("Entered");
-				sauer=sauer-1;
-				sauer();
+				//System.out.println("Entered");
+				//sauer=sauer-1;
+				//sauer();
+				//Mp3 player = new Mp3("lol");
+				//player.start();
 				
 			}
 
@@ -232,6 +234,8 @@ public class TestParticleGUI extends JWindow {
 				System.out.println("left");
 				sauer=sauer-1;
 				sauer();
+				Mp3 player = new Mp3("lol");
+				player.start();
 			}
 
 			@Override
