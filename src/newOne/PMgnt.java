@@ -59,7 +59,7 @@ public class PMgnt {
 
 	public void removeparticle(int number){
 		//prevent errors
-		if(particlesystem.length>4){
+		/*if(particlesystem.length>4){
 			//Helper particle system
 			particlesystem2 = new Particle[particlesystem.length-number];
 			//loading old system in helper one
@@ -69,7 +69,7 @@ public class PMgnt {
 			//switch the arrays
 			particlesystem=particlesystem2;
 		}
-		/*//create new physicsarray
+		//create new physicsarray
 				double[] newvars= new double[particlesystem.length*4];
 				for(int i=0; i>number; i+=4){
 					for(int j=0; j<4; j++){
