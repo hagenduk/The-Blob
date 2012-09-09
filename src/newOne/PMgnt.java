@@ -1,5 +1,6 @@
 package newOne;
 
+//this is the particlemanagement class
 public class PMgnt {
 	
 	private int system_size = 0;
@@ -11,7 +12,6 @@ public class PMgnt {
 	private int area_y = 0;
 	private int rad_distance = 0;
 	private int particleCounter = 0;
-	public PhysicEngine pe;
 	
 	public PMgnt(int system_size, int area_x, int area_y, int rad_distance){
 		this.system_size = system_size;
@@ -23,6 +23,8 @@ public class PMgnt {
 		particleCounter = 0;
 	}
 	
+	
+	//this method is not released in this version because of serious sideeffects - it should have inserted particles when chemie is selected
 	public void insertparticle(int number){
 		/*//Helper particle system
 		particlesystem2 = new Particle[particlesystem.length+number];
@@ -56,7 +58,8 @@ public class PMgnt {
 		}
 		pe.calc=calc;*/
 	}
-
+	
+	//this method is not released in this version because of serious sideeffects - it should remove particles when homeopathy is selected
 	public void removeparticle(int number){
 		//prevent errors
 		/*if(particlesystem.length>4){
@@ -88,7 +91,7 @@ public class PMgnt {
 		
 	}
 
-	
+//creates a new particle	
 public void createParticle() {
 		boolean done = false;
 		pos_x = (int) ((Math.random()+1)*area_x);
@@ -116,6 +119,7 @@ public void createParticle() {
 		}
 	}
 
+//are particles next to each other?
 	private boolean isNeighbour() {
 		boolean check = false;
 		int resultVector_y = 0;
@@ -137,11 +141,13 @@ public void createParticle() {
 		return check;
 	}
 
+	//distance calculation
 	public int calculateDistance(int resultVector_x, int resultVector_y) {
 		int distance = (int) Math.sqrt((resultVector_y*resultVector_x)+(resultVector_y*resultVector_y));
 		return distance;
 	}
 
+	//just for testing
 	public void printParticleLocation() {
 		int i = 1;
 		for(Particle p : particlesystem){
@@ -151,11 +157,4 @@ public void createParticle() {
 			i++;
 		}
 	}
-
-	
-	public void move(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

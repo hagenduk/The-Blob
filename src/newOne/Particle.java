@@ -7,8 +7,9 @@ public class Particle {
 	public final int OUTER_RAD = 20;
 	private double[] location = new double[2];
 	private double[] speed = {0, 0};
-	public int kind=0; //TODO Was ist das?
+	public int kind=0; //this makes sure that the eyes, etc. are added
 	Random rnd = new Random();
+	//randomly defines the texture a particle is renderd with
 	int choice = rnd.nextInt(5)+1;
 	private boolean locked = false; //Is set true when the particle is being used by an event and shouldn't be computed by the PE
 

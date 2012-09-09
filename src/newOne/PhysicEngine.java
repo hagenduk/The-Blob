@@ -49,6 +49,7 @@ public class PhysicEngine {
 		/*
 		 * Reset the Helper pm
 		 */
+		// VERY IMPORTANT -> change first parameter if you change the amount of particles
 		tmp_pmgnt = new PMgnt(20,600,600,10);
 		tmp_pmgnt.createParticle();
 		tmp_pm = tmp_pmgnt.particlesystem;

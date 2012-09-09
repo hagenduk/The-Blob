@@ -36,6 +36,7 @@ public class Mp3 extends Thread{
 			inBad = new FileInputStream(path+"/burp-1.mp3");
 			pBad = new Player(inBad);
 			
+			//randomly define the played sound
 			Random rnd = new Random();
 			int choice = rnd.nextInt(6)+1;
 			if(choice==1){
@@ -58,7 +59,8 @@ public class Mp3 extends Thread{
 			plol = new Player(inlol);
 			}
 			
-			choice = rnd.nextInt(6)+1;
+			//randomly define the played sound
+			choice = rnd.nextInt(8)+1;
 			if(choice==1){
 			innlol = new FileInputStream(path+"/Angry.mp3");
 			pnlol = new Player(innlol);
@@ -84,22 +86,19 @@ public class Mp3 extends Thread{
 			innlol = new FileInputStream(path+"/sigh-1.mp3");
 			pnlol = new Player(innlol);
 			}
-			//run(was);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JavaLayerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	//plays a laugh
 	private void runGood() {
 		p = pGood;
 		try {
 			p.play();
 		} catch (JavaLayerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -107,13 +106,12 @@ public class Mp3 extends Thread{
 		Mp3.currentThread().interrupt();
 	}
 
-
+	//play a burp
 	private void runBad() {
 		p = pBad;
 		try {
 			p.play();
 		} catch (JavaLayerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -121,29 +119,26 @@ public class Mp3 extends Thread{
 		Mp3.currentThread().interrupt();
 	}
 	
+	//plays a lol
 	private void runlol() {
 		p = plol;
 		try {
 			p.play();
 		} catch (JavaLayerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		//System.out.println("lol");
 		Mp3.currentThread().interrupt();
 	}
 	
+	//plays a no or oh my god or what ever
 	private void runnlol() {
 		p = pnlol;
 		try {
 			p.play();
 		} catch (JavaLayerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		//System.out.println("lol");
 		Mp3.currentThread().interrupt();
 	}
 	

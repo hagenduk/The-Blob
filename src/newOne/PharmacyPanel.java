@@ -30,7 +30,7 @@ public class PharmacyPanel extends JFrame {
 	private JButton btnChemie;
 	private JButton btnHomoe;
 
-	//TODO test
+	//state for events
 	public int state=0;
 	
 	public int getState() {
@@ -89,8 +89,7 @@ public class PharmacyPanel extends JFrame {
 		 */
 		btnHomoe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Homoe");
-				setState(2);
+				setState(2); //set the state to two = homoe for events
 			}
 		});
 		
@@ -100,8 +99,7 @@ public class PharmacyPanel extends JFrame {
 		 */
 		btnChemie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Chemie");
-				setState(1);
+				setState(1); //set the state to two = homoe for events
 			}
 		});
 		setContentPane(contentPane);
